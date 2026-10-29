@@ -55,14 +55,14 @@ sobre a fauna amazônica (arara, onça-pintada, boto-cor-de-rosa, tucano e capiv
 
 ### Opção A — Baixar o jogo pronto (Windows)
 
-1. Abra a página **[Releases](https://github.com/{{REPO}}/releases/latest)** do repositório.
+1. Abra a página **[Releases](https://github.com/RicardoFissmer/leo-na-amazonia/releases/latest)** do repositório.
 2. Baixe o arquivo **`LeoNaAmazonia-windows.zip`**.
 3. Descompacte o arquivo em qualquer pasta.
 
 ### Opção B — Clonar o repositório com Git
 
 ```bash
-git clone https://github.com/{{REPO}}.git
+git clone https://github.com/RicardoFissmer/leo-na-amazonia.git
 ```
 
 ### Opção C — Baixar o código como ZIP (sem Git)
