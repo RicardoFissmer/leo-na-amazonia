@@ -1,2 +1,11 @@
+# Pasta de cache do Godot (é recriada ao abrir o projeto)
 .godot/
 
+# Executáveis exportados (ficam na página de Releases do GitHub)
+build/
+*.exe
+*.pck
+
+# Arquivos do sistema
+Thumbs.db
+.DS_Store

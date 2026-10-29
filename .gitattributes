@@ -1,0 +1,5 @@
+# Godot usa finais de linha LF
+* text=auto eol=lf
+*.png binary
+*.wav binary
+*.ogg binary
