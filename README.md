@@ -1,5 +1,7 @@
 # Léo na Amazônia
 
+![Capa do jogo Léo na Amazônia](capa/capa_1920x1080.png)
+
 Jogo de plataforma 2D educativo, em pixel art, feito na **Godot Engine 4**.
 O Léo atravessa a floresta amazônica coletando letras espalhadas pelo caminho. Com elas, o jogador
 **monta o nome de um animal da Amazônia** e depois responde a um desafio de **Verdadeiro ou Falso**
@@ -266,7 +268,8 @@ assets/              imagens em pixel art (personagens, cenário, inimigos)
 assets/animais/      imagens dos animais (96×72) das telas de desafio
 sons/                música (musica.ogg) e efeitos sonoros (.wav)
 docs/GDD.md          documento de design do jogo
-tools/               gerador de arte em Python e prévias das imagens (o Godot ignora esta pasta)
+capa/                capa do jogo (1920x1080, 1280x640 e 320x180)
+tools/               gerador de arte e da capa em Python e prévias das imagens (o Godot ignora esta pasta)
 ```
 
 ---
@@ -284,3 +287,4 @@ tools/               gerador de arte em Python e prévias das imagens (o Godot i
 - **Sons:** substitua os arquivos em `sons/` mantendo os mesmos nomes. O volume fica em `scripts/audio.gd`.
 - **Arte dos animais e inimigos:** instale o Pillow (`py -m pip install pillow`), ajuste `tools/gerar_arte.py`
   e rode `py tools/gerar_arte.py` na pasta do projeto.
+- **Capa:** rode `py tools/gerar_capa.py` (usa as mesmas imagens do jogo; regrava os arquivos em `capa/`).

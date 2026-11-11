@@ -261,7 +261,8 @@ CINZA_ESC = rampa("#141418", "#24242c", "#383844", "#50505e")
 BRANCO = rampa("#b9b2a2", "#ded8c8", "#f4f0e6", "#ffffff")
 
 
-def arara():
+def arara(fundo=True):
+    """fundo=False devolve só o animal, sem cenário (usado na capa)."""
     t = Tela()
     ceu(t)
     mata(t, 26, (8, 13), MATA_LONGE, 2)
@@ -306,6 +307,8 @@ def arara():
     # pés no galho
     for x in (49, 54):
         a.pintar(elipse(x, 53, 2.2, 1.6, CINZA_ESC))
+    if not fundo:
+        return a
     t.colar(a)
     moldura(t)
     return t
@@ -315,7 +318,8 @@ PRETO = rampa("#09090d", "#16161e", "#262633", "#3c3c52")
 LARANJA = rampa("#a8400a", "#e06a0e", "#ff951c", "#ffc24a")
 
 
-def tucano():
+def tucano(fundo=True):
+    """fundo=False devolve só o animal, sem cenário (usado na capa)."""
     t = Tela()
     ceu(t)
     mata(t, 28, (8, 14), MATA_LONGE, 4)
@@ -354,6 +358,8 @@ def tucano():
     a.ponto(54, 17, "#0b0b0b"); a.ponto(53, 16, "#ffffff")
     for x in (45, 49):
         a.pintar(elipse(x, 55, 2, 1.5, rampa("#1e3f80", "#3462b8", "#5b8ce0")))
+    if not fundo:
+        return a
     t.colar(a)
     moldura(t)
     return t
@@ -364,7 +370,8 @@ CREME = rampa("#b99a70", "#dcc49c", "#f4e6c8", "#fff6e4")
 ROSETA = cor("#2e1a06")
 
 
-def onca():
+def onca(fundo=True):
+    """fundo=False devolve só o animal, sem cenário (usado na capa)."""
     t = Tela()
     ceu(t)
     mata(t, 24, (8, 13), MATA_LONGE, 6)
@@ -423,6 +430,8 @@ def onca():
     # pintinhas na cabeça
     for (x, y) in [(62, 26), (64, 23), (66, 31), (63, 30), (60, 28)]:
         a.ponto(x, y, ROSETA)
+    if not fundo:
+        return a
     t.colar(a)
     moldura(t)
     return t
@@ -431,7 +440,8 @@ def onca():
 ROSA = rampa("#9a4566", "#cf7092", "#ef9ab4", "#ffc8d6")
 
 
-def boto():
+def boto(fundo=True):
+    """fundo=False devolve só o animal, sem cenário (usado na capa)."""
     t = Tela()
     ceu(t, 44)
     mata(t, 26, (7, 12), MATA_LONGE, 9)
@@ -455,6 +465,8 @@ def boto():
     # nadadeira de cima e do lado
     a.pintar(poligono([(42, 26), (47, 21), (49, 27)], ROSA, (1, 1)))
     a.pintar(elipse(54, 37, 4, 2, ROSA, rot=0.6, brilho=-0.15))
+    if not fundo:
+        return a
     t.colar(a)
     # respingos e anel de água onde ele saiu
     for (x, y) in [(14, 36), (18, 33), (31, 40), (35, 37), (12, 42), (33, 43), (22, 38)]:
@@ -470,7 +482,8 @@ CAPI = rampa("#3e2618", "#6a432a", "#93653f", "#b88654")
 CAPI_ESC = rampa("#2c1a10", "#4a2e1c", "#6a432a")
 
 
-def capivara():
+def capivara(fundo=True):
+    """fundo=False devolve só o animal, sem cenário (usado na capa)."""
     t = Tela()
     ceu(t)
     mata(t, 24, (8, 13), MATA_LONGE, 15)
@@ -507,6 +520,8 @@ def capivara():
     a.ponto(44, 21, "#ffffff"); a.ponto(45, 21, "#ffffff"); a.ponto(45, 20, "#111111")
     a.ponto(47, 21, "#3a2a18")
     a.pintar(poligono([(35, 23), (38, 22), (37, 25)], rampa("#5a4a30", "#7a6646", "#9a845e")))
+    if not fundo:
+        return a
     t.colar(a)
     moldura(t)
     return t
