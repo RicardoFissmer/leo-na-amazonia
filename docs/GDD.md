@@ -1,8 +1,8 @@
 # GDD — Léo na Amazônia
 
 **Documento de Design do Jogo**
-Versão do documento: 1.4 — atualizado em 12/11/2026
-Versão do jogo descrita: 1.4 (Godot 4.7.2)
+Versão do documento: 1.5 — atualizado em 12/11/2026
+Versão do jogo descrita: 1.5 (Godot 4.7.2)
 
 ---
 
@@ -313,6 +313,20 @@ Exemplo para a ARARA: 50 + 50 + 60 = 160.
 
 ---
 
+### Efeitos de tela
+
+| Efeito | Quando | Por quê |
+|---|---|---|
+| Vinheta leve + cor um pouco mais viva | Sempre, só no cenário (camada abaixo do HUD) | Dá clima de mata fechada sem afetar a leitura dos textos |
+| Transição pixelada (a tela vira "pixelões" e escurece, ~0,5 s) | Ao abrir a história, começar a fase 1, trocar de fase, recomeçar a fase e voltar ao menu no final | Deixa claro que algo mudou e combina com o estilo pixel art |
+| Modo retrô: linhas de TV antiga, tela levemente curva e vinheta | Opcional (tecla R ou botão no menu). Desligado por padrão e salvo em `user://config.cfg` | Diversão para quem gosta de visual retrô, sem prejudicar quem precisa de texto nítido |
+
+Efeitos do VesperaFX **não usados** de propósito: ruído/rastreamento de VHS, distorção psicodélica, rastros
+e redução de paleta com pontilhado. Eles reduzem a legibilidade, o que vai contra a prioridade de acessibilidade
+para crianças em alfabetização.
+
+---
+
 ## 13. Áudio
 
 | Arquivo | Quando toca |
@@ -332,6 +346,7 @@ Exemplo para a ARARA: 50 + 50 + 60 = 160.
 ## 14. Tecnologia e arquitetura
 
 - **Engine:** Godot 4.7.2, renderizador Forward+, GDScript, sem plugins.
+- **Efeitos de tela:** `scripts/efeitos.gd` com shaders próprios (`shaders/ambiente.gdshader` e `shaders/tela.gdshader`) montados a partir de módulos do [VesperaFX](https://github.com/devkcud/VesperaFX) (devkcud, MPL-2.0), copiados sem modificação em `shaders/vesperafx/`.
 - **Cena única:** `scenes/main.tscn` tem um só nó com `main.gd`. Todo o resto (sprites, colisões,
   interface, controles do teclado) é criado por código. Assim tudo fica visível em texto e fácil de versionar.
 - **Comunicação por sinais:** o jogador emite `caiu`, `machucado(quem)` e `pulou`; a letra emite `coletada`;
@@ -389,3 +404,4 @@ main.gd
 | 1.2 | 17/10/2026 | Novo desafio: Verdadeiro ou Falso depois de montar a palavra. Texto do *Como jogar* atualizado |
 | 1.3 | 29/10/2026 | Guia completo de instalação e uso no README, este GDD, executável único para Windows |
 | 1.4 | 12/11/2026 | História do Livro da Floresta (telas de abertura e final), tutorial na fase 1 com tentativa segura, mensagens com mais tempo de leitura, capa do jogo |
+| 1.5 | 12/11/2026 | Efeitos de tela com o VesperaFX: vinheta e cor no cenário, transição pixelada entre telas e modo retrô opcional (tecla R / menu) |

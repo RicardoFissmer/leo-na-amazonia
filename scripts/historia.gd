@@ -10,6 +10,7 @@ var atual := 0
 var ao_terminar: Callable
 var texto_ultima := "começar"  # o que o ENTER faz na última página
 var espera := 0.0
+var terminou := false  # já chamou `ao_terminar`; quem chamou fecha a tela (ex.: no meio da transição)
 var letras_visiveis := 0.0
 
 var titulo: Label
@@ -77,6 +78,7 @@ func mostrar(lista: Array, fim: Callable, acao_final := "começar") -> void:
 	ao_terminar = fim
 	texto_ultima = acao_final
 	atual = 0
+	terminou = false
 	visible = true
 	_mostrar_pagina()
 
@@ -86,7 +88,7 @@ func fechar() -> void:
 
 
 func _process(delta: float) -> void:
-	if not visible:
+	if not visible or terminou:
 		return
 	espera = maxf(espera - delta, 0.0)
 	if texto.visible_characters >= 0:
@@ -103,7 +105,7 @@ func _process(delta: float) -> void:
 
 
 func _ao_clicar(evento: InputEvent) -> void:
-	if evento is InputEventMouseButton and evento.pressed and espera <= 0.0:
+	if evento is InputEventMouseButton and evento.pressed and espera <= 0.0 and not terminou:
 		_avancar()
 
 
@@ -135,7 +137,7 @@ func _avancar() -> void:
 
 
 func _terminar() -> void:
-	visible = false
+	terminou = true
 	if ao_terminar.is_valid():
 		ao_terminar.call()
 

@@ -1,13 +1,15 @@
 extends CanvasLayer
-## Tela inicial: título, botões Jogar / Como jogar / Sair e instruções.
+## Tela inicial: título, botões Jogar / Como jogar / Modo retrô / Sair e instruções.
 
 signal jogar
 
 var audio  # referência ao nó de áudio (definida pelo main.gd)
+var efeitos  # referência aos efeitos de tela (definida pelo main.gd)
 var titulo: Label
 var botoes: VBoxContainer
 var botao_jogar: Button
 var botao_voltar: Button
+var botao_retro: Button
 var painel_ajuda: Panel
 var silencioso := false
 var t := 0.0
@@ -27,15 +29,17 @@ func _ready() -> void:
 	_label("Colete as letras e forme palavras!", 8, Color("e8fff0"), Vector2(0, 52), Vector2(320, 12))
 
 	botoes = VBoxContainer.new()
-	botoes.position = Vector2(110, 69)
-	botoes.size = Vector2(100, 54)
+	botoes.position = Vector2(110, 68)
+	botoes.size = Vector2(100, 73)
 	botoes.add_theme_constant_override("separation", 3)
 	add_child(botoes)
 	botao_jogar = _botao("Jogar", _ao_jogar)
 	_botao("Como jogar", _abrir_ajuda)
+	botao_retro = _botao("Modo retrô: não", _alternar_retro)
 	_botao("Sair", _sair)
+	atualizar_botao_retro()
 
-	_label("M: liga/desliga o som", 7, Color("c8f0d8"), Vector2(0, 168), Vector2(320, 10))
+	_label("M: liga/desliga o som     R: modo retrô", 7, Color("c8f0d8"), Vector2(0, 168), Vector2(320, 10))
 	_criar_ajuda()
 
 
@@ -56,6 +60,11 @@ func mostrar() -> void:
 func esconder() -> void:
 	visible = false
 	get_viewport().gui_release_focus()
+
+
+func atualizar_botao_retro() -> void:
+	if botao_retro and efeitos:
+		botao_retro.text = "Modo retrô: sim" if efeitos.retro else "Modo retrô: não"
 
 
 # ---------------------------------------------------------------- montagem
@@ -129,7 +138,8 @@ func _criar_ajuda() -> void:
 		"Depois, monte a palavra na ordem certa\n" +
 		"e responda: verdadeiro ou falso?\n" +
 		"Cuidado com a onça, a cobra, a piranha e o rio!\n" +
-		"Letras erradas tiram pontos.   Esc: menu   M: som")
+		"Letras erradas tiram pontos.\n" +
+		"Esc: menu    M: som    R: modo retrô")
 	texto.position = Vector2(14, 22)
 	texto.size = Vector2(232, 98)
 	texto.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -175,6 +185,12 @@ func _fechar_ajuda() -> void:
 	silencioso = true
 	botao_jogar.grab_focus()
 	silencioso = false
+
+
+func _alternar_retro() -> void:
+	if efeitos:
+		efeitos.alternar_retro()
+		atualizar_botao_retro()
 
 
 func _sair() -> void:

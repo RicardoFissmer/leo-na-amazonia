@@ -15,6 +15,7 @@ const Montagem = preload("res://scripts/montagem.gd")
 const VerdadeiroFalso = preload("res://scripts/verdadeiro_falso.gd")
 const Historia = preload("res://scripts/historia.gd")
 const Tutorial = preload("res://scripts/tutorial.gd")
+const Efeitos = preload("res://scripts/efeitos.gd")
 
 const TILE := 16
 const ALTURA_TELA := 180
@@ -157,6 +158,7 @@ var montagem: Montagem
 var vf: VerdadeiroFalso
 var historia: Historia
 var tutorial: Tutorial
+var efeitos: Efeitos
 var tutorial_concluido := false  # depois de passar pela parte do tutorial, ele não volta ao recomeçar a fase
 var camadas: Array[Parallax2D] = []
 var faixas_menu: Array[Sprite2D] = []
@@ -175,12 +177,17 @@ var tex_heliconia: Texture2D = load("res://assets/heliconia.png")
 func _ready() -> void:
 	_configurar_controles()
 	_criar_fundo()
+	efeitos = Efeitos.new()
+	add_child(efeitos)
 	hud = Hud.new()
+	hud.layer = 2  # acima da vinheta/cor do cenário (camada 1)
 	add_child(hud)
 	audio = Audio.new()
 	add_child(audio)
 	titulo = Titulo.new()
 	titulo.audio = audio
+	titulo.efeitos = efeitos
+	titulo.layer = 2
 	titulo.jogar.connect(iniciar_jogo)
 	add_child(titulo)
 	montagem = Montagem.new()
@@ -205,9 +212,16 @@ func _process(delta: float) -> void:
 		var mudo := audio.alternar_mudo()
 		if estado == "jogo":
 			hud.mensagem("Som desligado" if mudo else "Som ligado", 1.0)
+	if Input.is_action_just_pressed("retro"):
+		var ligado := efeitos.alternar_retro()
+		titulo.atualizar_botao_retro()
+		if estado == "jogo":
+			hud.mensagem("Modo retrô ligado" if ligado else "Modo retrô desligado", 1.5)
 
 	if estado == "menu" or estado == "historia":
 		_animar_menu(delta)  # a história aparece por cima da animação do menu
+		return
+	if efeitos.em_transicao:
 		return
 
 	espera_confirmar = maxf(espera_confirmar - delta, 0.0)
@@ -219,11 +233,10 @@ func _process(delta: float) -> void:
 		if not desafio_feito:
 			_abrir_desafio()
 			return
-		vf.fechar()
 		if nivel == PALAVRAS.size() - 1:
-			_mostrar_final()
+			efeitos.transicao(_mostrar_final)
 		else:
-			carregar_nivel(nivel + 1)
+			efeitos.transicao(carregar_nivel.bind(nivel + 1))
 
 
 # ---------------------------------------------------------------- controles
@@ -236,6 +249,7 @@ func _configurar_controles() -> void:
 		"confirmar": [KEY_ENTER, KEY_KP_ENTER],
 		"voltar": [KEY_ESCAPE],
 		"som": [KEY_M],
+		"retro": [KEY_R],
 		"desfazer": [KEY_BACKSPACE],
 	}
 	for acao in teclas:
@@ -341,13 +355,20 @@ func _animar_menu(delta: float) -> void:
 
 
 func iniciar_jogo() -> void:
+	if efeitos.em_transicao:
+		return
 	audio.tocar("comecar")
+	efeitos.transicao(_abrir_historia_inicio)
+
+
+func _abrir_historia_inicio() -> void:
 	titulo.esconder()
 	estado = "historia"
-	historia.mostrar(HISTORIA_INICIO, _comecar_primeira_fase)
+	historia.mostrar(HISTORIA_INICIO, efeitos.transicao.bind(_comecar_primeira_fase))
 
 
 func _comecar_primeira_fase() -> void:
+	historia.fechar()
 	for c in camadas:
 		c.autoscroll = Vector2.ZERO
 		c.scroll_offset = Vector2.ZERO
@@ -364,7 +385,7 @@ func _mostrar_final() -> void:
 	mostrar_menu()
 	estado = "historia"
 	titulo.esconder()
-	historia.mostrar(paginas, mostrar_menu, "voltar ao menu")
+	historia.mostrar(paginas, efeitos.transicao.bind(mostrar_menu), "voltar ao menu")
 
 
 # ---------------------------------------------------------------- fase
@@ -705,7 +726,7 @@ func _ao_cair() -> void:
 
 
 func _perder_vida(texto: String, voltar_ao_inicio := false) -> void:
-	if fim_de_fase or montando or respondendo or estado != "jogo":
+	if fim_de_fase or montando or respondendo or estado != "jogo" or efeitos.em_transicao:
 		return
 	# no tutorial da fase 1, errar não tira vida: o Léo volta para logo antes do obstáculo
 	if tutorial.protege(jogador.global_position.x):
@@ -717,13 +738,19 @@ func _perder_vida(texto: String, voltar_ao_inicio := false) -> void:
 		tutorial_concluido = true
 	vidas -= 1
 	if vidas <= 0:
-		carregar_nivel(nivel)
-		hud.mensagem("Tente de novo!", 2.0)
+		_atualizar_hud()
+		jogador.travado = true
+		efeitos.transicao(_recomecar_fase)
 		return
 	hud.mensagem(texto)
 	if voltar_ao_inicio:
 		jogador.reaparecer(inicio)
 	_atualizar_hud()
+
+
+func _recomecar_fase() -> void:
+	carregar_nivel(nivel)
+	hud.mensagem("Tente de novo!", 2.0)
 
 
 func _atualizar_hud() -> void:

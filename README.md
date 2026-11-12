@@ -28,6 +28,7 @@ sobre a fauna amazônica (arara, onça-pintada, boto-cor-de-rosa, tucano e capiv
 7. [Limitações conhecidas e o que ainda não foi feito](#7-limitações-conhecidas-e-o-que-ainda-não-foi-feito)
 8. [Estrutura do projeto](#8-estrutura-do-projeto)
 9. [Como modificar o jogo](#9-como-modificar-o-jogo)
+10. [Créditos e licenças](#10-créditos-e-licenças)
 
 ---
 
@@ -168,6 +169,7 @@ do obstáculo e pode tentar de novo. Depois do último aviso ("Agora é com voc�
 | **Backspace** | Montar a palavra | Desfaz a última letra colocada |
 | **Esc** | Qualquer momento | Volta para a tela inicial (o progresso da partida é perdido) |
 | **M** | Qualquer momento | Liga / desliga o som |
+| **R** | Qualquer momento | Liga / desliga o **modo retrô** (linhas de TV antiga e tela curva). Também dá para mudar no menu, no botão *Modo retrô*. A escolha fica salva |
 
 ### Interface (HUD)
 
@@ -278,6 +280,9 @@ scripts/
   verdadeiro_falso.gd  desafio de Verdadeiro ou Falso
   historia.gd          telas da história (começo e fim do jogo)
   tutorial.gd          dicas do tutorial da fase 1
+  efeitos.gd           efeitos de tela: vinheta/cor, transição pixelada e modo retrô
+shaders/             shaders dos efeitos (ambiente.gdshader e tela.gdshader)
+shaders/vesperafx/   módulos do VesperaFX usados pelos shaders (licença MPL-2.0)
   hud.gd               letras, dica, vidas, pontos e mensagens
   player.gd            movimento e pulo do Léo
   letra.gd             letra coletável
@@ -316,3 +321,14 @@ tools/               gerador de arte e da capa em Python e prévias das imagens 
 - **Dicas do tutorial:** a lista `PASSOS` no começo de `scripts/tutorial.gd` diz em que coluna do mapa cada dica
   aparece e o que o jogador precisa fazer para ela sumir.
 - **Capa:** rode `py tools/gerar_capa.py` (usa as mesmas imagens do jogo; regrava os arquivos em `capa/`).
+- **Efeitos de tela:** a intensidade da vinheta, da cor, das linhas do modo retrô e a duração da transição ficam
+  no começo de `scripts/efeitos.gd`.
+
+---
+
+## 10. Créditos e licenças
+
+- **Efeitos de tela:** módulos do [VesperaFX](https://github.com/devkcud/VesperaFX), de **devkcud**, sob a
+  [Mozilla Public License 2.0](shaders/vesperafx/LICENSE.txt). Usamos `crt`, `pixelation`, `rendering` e `utils`
+  sem modificação (detalhes em [shaders/vesperafx/LEIAME.md](shaders/vesperafx/LEIAME.md)).
+- **Engine:** [Godot Engine](https://godotengine.org) (licença MIT), com a fonte padrão do Godot.
