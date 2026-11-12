@@ -47,7 +47,7 @@ func _ready() -> void:
 	rotulo_pontos = _label(Vector2(262, 2), Vector2(54, 12), 9, Color("ffd21f"))
 	rotulo_pontos.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
-	rotulo_msg = _label(Vector2(0, 40), Vector2(320, 16), 10, Color.WHITE)
+	rotulo_msg = _label(Vector2(0, 56), Vector2(320, 16), 10, Color.WHITE)
 	rotulo_msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	rotulo_msg.add_theme_constant_override("outline_size", 3)
 	rotulo_msg.add_theme_color_override("font_outline_color", Color.BLACK)
@@ -141,7 +141,7 @@ func atualizar(coletadas: Array[String], total: int, dica: String, vidas: int, p
 	rotulo_pontos.text = str(pontos)
 
 
-func mensagem(texto: String, duracao := 1.5) -> void:
+func mensagem(texto: String, duracao := 2.5) -> void:
 	rotulo_msg.text = texto
 	rotulo_msg.visible = true
 	tempo_msg = duracao

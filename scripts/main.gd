@@ -13,6 +13,8 @@ const Audio = preload("res://scripts/audio.gd")
 const Titulo = preload("res://scripts/titulo.gd")
 const Montagem = preload("res://scripts/montagem.gd")
 const VerdadeiroFalso = preload("res://scripts/verdadeiro_falso.gd")
+const Historia = preload("res://scripts/historia.gd")
+const Tutorial = preload("res://scripts/tutorial.gd")
 
 const TILE := 16
 const ALTURA_TELA := 180
@@ -94,6 +96,23 @@ const PALAVRAS := [
 		]},
 ]
 
+## História: o Livro da Floresta da vovó Lúcia perdeu as letras numa ventania,
+## e o Léo vai até a mata devolver o nome de cada animal.
+const HISTORIA_INICIO := [
+	{"titulo": "O Livro da Floresta", "imagem": "res://assets/historia/livro.png",
+		"texto": "O Léo adora o Livro da Floresta da vovó Lúcia. Cada página mostra um animal da Amazônia e o nome dele."},
+	{"titulo": "Uma ventania!", "imagem": "res://assets/historia/livro_vento.png",
+		"texto": "Numa tarde, uma ventania arrancou as letras do livro e espalhou tudo pela mata. Os animais ficaram sem nome!"},
+	{"titulo": "A missão do Léo", "imagem": "res://assets/historia/leo_missao.png",
+		"texto": "O Léo vai entrar na floresta para achar as letras e devolver o nome de cada animal. Cuidado com a onça, a cobra e a piranha!"},
+]
+const HISTORIA_FIM := [
+	{"titulo": "O livro está completo!", "imagem": "res://assets/historia/livro_completo.png",
+		"texto": "O Léo achou todas as letras! A arara, a onça, o boto, o tucano e a capivara têm o seu nome de volta."},
+	{"titulo": "Obrigada, Léo!", "imagem": "res://assets/historia/leo_missao.png",
+		"texto": "A vovó Lúcia ficou muito feliz. Agora todo mundo pode aprender sobre os animais da Amazônia.\nVocê fez %d pontos!"},
+]
+
 ## Legenda do mapa (cada caractere = 16x16 pixels):
 ##   #  chão          ~  água           =  plataforma de tronco
 ##   P  início do Léo O  onça           .  vazio
@@ -136,6 +155,9 @@ var audio: Audio
 var titulo: Titulo
 var montagem: Montagem
 var vf: VerdadeiroFalso
+var historia: Historia
+var tutorial: Tutorial
+var tutorial_concluido := false  # depois de passar pela parte do tutorial, ele não volta ao recomeçar a fase
 var camadas: Array[Parallax2D] = []
 var faixas_menu: Array[Sprite2D] = []
 var letras_menu: Array[Node2D] = []
@@ -169,6 +191,11 @@ func _ready() -> void:
 	vf.audio = audio
 	vf.concluido.connect(_ao_responder)
 	add_child(vf)
+	historia = Historia.new()
+	add_child(historia)
+	tutorial = Tutorial.new()
+	tutorial.audio = audio
+	add_child(tutorial)
 	mostrar_menu()
 	audio.tocar_musica()
 
@@ -179,8 +206,8 @@ func _process(delta: float) -> void:
 		if estado == "jogo":
 			hud.mensagem("Som desligado" if mudo else "Som ligado", 1.0)
 
-	if estado == "menu":
-		_animar_menu(delta)
+	if estado == "menu" or estado == "historia":
+		_animar_menu(delta)  # a história aparece por cima da animação do menu
 		return
 
 	espera_confirmar = maxf(espera_confirmar - delta, 0.0)
@@ -194,7 +221,7 @@ func _process(delta: float) -> void:
 			return
 		vf.fechar()
 		if nivel == PALAVRAS.size() - 1:
-			mostrar_menu()
+			_mostrar_final()
 		else:
 			carregar_nivel(nivel + 1)
 
@@ -250,6 +277,8 @@ func mostrar_menu() -> void:
 	respondendo = false
 	montagem.fechar()
 	vf.fechar()
+	tutorial.parar()
+	historia.fechar()
 	hud.esconder_painel()
 	hud.visible = false
 	_novo_mundo()
@@ -314,13 +343,28 @@ func _animar_menu(delta: float) -> void:
 func iniciar_jogo() -> void:
 	audio.tocar("comecar")
 	titulo.esconder()
+	estado = "historia"
+	historia.mostrar(HISTORIA_INICIO, _comecar_primeira_fase)
+
+
+func _comecar_primeira_fase() -> void:
 	for c in camadas:
 		c.autoscroll = Vector2.ZERO
 		c.scroll_offset = Vector2.ZERO
 	estado = "jogo"
 	hud.visible = true
 	pontos = 0
+	tutorial_concluido = false
 	carregar_nivel(0)
+
+
+func _mostrar_final() -> void:
+	var paginas := HISTORIA_FIM.duplicate(true)
+	paginas[-1]["texto"] = paginas[-1]["texto"] % pontos
+	mostrar_menu()
+	estado = "historia"
+	titulo.esconder()
+	historia.mostrar(paginas, mostrar_menu, "voltar ao menu")
 
 
 # ---------------------------------------------------------------- fase
@@ -423,7 +467,14 @@ func carregar_nivel(i: int) -> void:
 	jogador.caiu.connect(_ao_cair)
 	jogador.machucado.connect(_ao_machucar)
 	jogador.pulou.connect(audio.tocar.bind("pulo"))
+	jogador.pulou.connect(tutorial.ao_pular)
 	mundo.add_child(jogador)
+
+	# a fase 1 ensina a jogar (até a pessoa passar pela parte do tutorial)
+	if nivel == 0 and not tutorial_concluido:
+		tutorial.iniciar(jogador, inicio)
+	else:
+		tutorial.parar()
 
 	var cam := Camera2D.new()
 	cam.limit_left = 0
@@ -436,7 +487,7 @@ func carregar_nivel(i: int) -> void:
 	cam.make_current()
 
 	_atualizar_hud()
-	hud.mensagem("Fase %d" % (nivel + 1), 2.0)
+	hud.mensagem("Fase %d: %s" % [nivel + 1, PALAVRAS[nivel]["dica"]], 3.5)
 
 
 func _novo_mundo() -> void:
@@ -547,19 +598,22 @@ func _ao_coletar(letra: String, no: Area2D) -> void:
 		coletadas.append(letra)
 		pontos += 10
 		audio.tocar("letra")
-		hud.mensagem("+10  Letra %s!" % letra, 1.0)
+		hud.mensagem("+10  Letra %s!" % letra, 1.5)
+		tutorial.ao_coletar(true)
 		if faltando.is_empty():
 			_abrir_montagem()
 	else:
 		pontos = maxi(0, pontos - 5)
 		audio.tocar("erro")
-		hud.mensagem("Ops! %s não faz parte da palavra" % letra)
+		hud.mensagem("Ops! A letra %s não está na palavra." % letra, 3.0)
+		tutorial.ao_coletar(false)
 	_atualizar_hud()
 
 
 func _abrir_montagem() -> void:
 	montando = true
 	jogador.travado = true
+	tutorial.esconder()
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	# se por acaso o Léo pegou na ordem certa, embaralha de novo
@@ -653,6 +707,14 @@ func _ao_cair() -> void:
 func _perder_vida(texto: String, voltar_ao_inicio := false) -> void:
 	if fim_de_fase or montando or respondendo or estado != "jogo":
 		return
+	# no tutorial da fase 1, errar não tira vida: o Léo volta para logo antes do obstáculo
+	if tutorial.protege(jogador.global_position.x):
+		hud.mensagem("Tudo bem! Tente de novo." if voltar_ao_inicio else texto, 2.0)
+		if voltar_ao_inicio:
+			jogador.reaparecer(tutorial.ponto_seguro)
+		return
+	if tutorial.ativo:
+		tutorial_concluido = true
 	vidas -= 1
 	if vidas <= 0:
 		carregar_nivel(nivel)

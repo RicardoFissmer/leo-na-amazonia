@@ -231,7 +231,7 @@ func _verificar() -> void:
 func _sucesso() -> void:
 	if audio:
 		audio.tocar("vitoria")
-	titulo.text = "Muito bem!"
+	titulo.text = "Muito bem! O nome voltou para o livro!"
 	texto.text = fato
 	linha_pecas.visible = false
 	rodape.text = rodape_final

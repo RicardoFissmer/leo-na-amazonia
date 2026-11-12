@@ -135,7 +135,26 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --export-release "Wind
    - **Como jogar** — mostra um resumo das regras e dos controles;
    - **Sair** — fecha o jogo.
 2. Escolha com o **mouse** ou com as **setas ↑ ↓ + Enter**.
-3. A fase começa com o Léo à esquerda do mapa. A **dica** do animal aparece no topo da tela.
+3. Ao clicar em **Jogar**, aparece a **história** em 3 telas: o *Livro da Floresta* da vovó Lúcia perdeu as
+   letras numa ventania, e o Léo vai à mata devolver o nome de cada animal.
+   **Enter**, **Espaço** ou um clique passam de tela. **Esc** pula a história.
+4. A fase 1 começa com o Léo à esquerda do mapa. A **dica** do animal aparece no topo da tela.
+
+### Tutorial (fase 1)
+
+A primeira fase ensina a jogar enquanto se joga. Uma dica de cada vez aparece num quadro no alto da tela,
+na hora certa, e some quando o jogador faz o que ela pede:
+
+1. andar (setas ou A/D);
+2. pegar a moeda com letra (e ver a letra aparecer no alto da tela);
+3. pular (Espaço);
+4. pular o buraco;
+5. passar pela onça;
+6. atravessar o rio quando a piranha mergulhar (as bolhas avisam que ela vai pular);
+7. passar pela cobra quando ela subir (ela treme antes de descer).
+
+Enquanto o Léo está nessa parte inicial do mapa, **errar não tira vida**: se ele cair, volta para logo antes
+do obstáculo e pode tentar de novo. Depois do último aviso ("Agora é com você!"), valem as regras normais.
 
 ### Controles
 
@@ -219,7 +238,8 @@ passando pelas **5 fases**: **ARARA → ONÇA → BOTO → TUCANO → CAPIVARA**
 
 ### Limitações da versão atual
 
-- **Não há tutorial interno.** O jogo só tem a tela *Como jogar*, com um resumo em texto (por isso este guia).
+- **O tutorial só ensina o movimento e os perigos.** A montagem da palavra e o Verdadeiro ou Falso são explicados
+  pelo texto da própria tela, sem passo a passo.
 - **Todas as fases usam o mesmo mapa.** O que muda é a palavra, a ordem das letras e as letras erradas.
 - **Não há salvamento.** Ao fechar o jogo ou apertar Esc, a partida e a pontuação são perdidas.
   Também não há recorde nem ranking.
@@ -234,7 +254,8 @@ passando pelas **5 fases**: **ARARA → ONÇA → BOTO → TUCANO → CAPIVARA**
 
 ### Funcionalidades planejadas e ainda não implementadas
 
-- Tutorial interativo na primeira fase.
+- Testes com crianças do público-alvo e ajustes a partir do que for observado.
+- Controle de volume e opção de texto maior.
 - Um mapa diferente para cada animal, com dificuldade crescente.
 - Novos tipos de desafio: **"Quem sou eu?"** (silhueta do animal) e **"Letra que falta"**.
 - *Checkpoint* no meio da fase e *jump buffer* (aceitar o pulo apertado um pouco antes de tocar o chão).
@@ -255,6 +276,8 @@ scripts/
   titulo.gd            tela inicial (Jogar, Como jogar, Sair)
   montagem.gd          tela de montar a palavra
   verdadeiro_falso.gd  desafio de Verdadeiro ou Falso
+  historia.gd          telas da história (começo e fim do jogo)
+  tutorial.gd          dicas do tutorial da fase 1
   hud.gd               letras, dica, vidas, pontos e mensagens
   player.gd            movimento e pulo do Léo
   letra.gd             letra coletável
@@ -266,6 +289,7 @@ scripts/
   util.gd              funções de apoio
 assets/              imagens em pixel art (personagens, cenário, inimigos)
 assets/animais/      imagens dos animais (96×72) das telas de desafio
+assets/historia/     imagens das telas da história (96×72)
 sons/                música (musica.ogg) e efeitos sonoros (.wav)
 docs/GDD.md          documento de design do jogo
 capa/                capa do jogo (1920x1080, 1280x640 e 320x180)
@@ -287,4 +311,8 @@ tools/               gerador de arte e da capa em Python e prévias das imagens 
 - **Sons:** substitua os arquivos em `sons/` mantendo os mesmos nomes. O volume fica em `scripts/audio.gd`.
 - **Arte dos animais e inimigos:** instale o Pillow (`py -m pip install pillow`), ajuste `tools/gerar_arte.py`
   e rode `py tools/gerar_arte.py` na pasta do projeto.
+- **História:** o texto das telas fica em `HISTORIA_INICIO` e `HISTORIA_FIM`, no começo de `scripts/main.gd`.
+  As imagens são geradas por `py tools/gerar_historia.py`.
+- **Dicas do tutorial:** a lista `PASSOS` no começo de `scripts/tutorial.gd` diz em que coluna do mapa cada dica
+  aparece e o que o jogador precisa fazer para ela sumir.
 - **Capa:** rode `py tools/gerar_capa.py` (usa as mesmas imagens do jogo; regrava os arquivos em `capa/`).

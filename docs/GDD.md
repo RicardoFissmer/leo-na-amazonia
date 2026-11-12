@@ -1,8 +1,8 @@
 # GDD — Léo na Amazônia
 
 **Documento de Design do Jogo**
-Versão do documento: 1.3 — atualizado em 29/10/2026
-Versão do jogo descrita: 1.3 (Godot 4.7.2)
+Versão do documento: 1.4 — atualizado em 12/11/2026
+Versão do jogo descrita: 1.4 (Godot 4.7.2)
 
 ---
 
@@ -48,6 +48,23 @@ cada fase.
 
 ---
 
+### História (sinopse)
+
+O Léo adora o **Livro da Floresta** da vovó Lúcia: cada página mostra um animal da Amazônia e o nome dele.
+Numa tarde, uma ventania arranca as letras do livro e espalha tudo pela mata, e os animais ficam sem nome.
+O Léo entra na floresta para recuperar as letras e devolver o nome de cada animal.
+
+| Elemento | No jogo |
+|---|---|
+| **Personagem e desejo** | O Léo quer consertar o livro da avó e devolver o nome aos animais |
+| **Conflito** | As letras estão espalhadas e fora de ordem, no meio de onças, cobras, piranhas, rios e buracos |
+| **Consequência** | Cada palavra montada "volta para o livro" ("Muito bem! O nome voltou para o livro!"). Ao final das 5 fases, o livro está completo e a vovó agradece |
+
+A história aparece em 3 telas antes da fase 1 e em 2 telas depois da fase 5 (com a pontuação final).
+O texto é mostrado aos poucos e pode ser pulado com Esc.
+
+---
+
 ## 2. Público-alvo e objetivos pedagógicos
 
 **Público-alvo:** crianças em fase de alfabetização e começo do ensino fundamental (aproximadamente
@@ -78,16 +95,25 @@ cada fase.
 ## 4. Fluxo do jogo
 
 ```
- Tela inicial ──► Fase N ─────────────────────────────────────────────┐
-  (Jogar /         │                                                  │
-   Como jogar /    ├─ 1. Plataforma: coletar todas as letras da palavra
-   Sair)           │      └─ perdeu as 3 vidas? → recomeça a fase N   │
-     ▲             ├─ 2. Montar a palavra (até acertar) + curiosidade │
-     │             ├─ 3. Verdadeiro ou Falso (3 afirmações)           │
-     │             └─ Enter ─► N < 5 ? Fase N+1 : "Você completou     │
-     │                                    todas as palavras!"         │
-     └──────────────── Esc (a qualquer momento) ◄─────────────────────┘
+ Tela inicial ──► História (3 telas) ──► Fase N ──────────────────────┐
+  (Jogar /                                │                           │
+   Como jogar /    (fase 1: tutorial) ────├─ 1. Plataforma: coletar todas as letras
+   Sair)                                  │      └─ perdeu as 3 vidas? → recomeça a fase N
+     ▲                                    ├─ 2. Montar a palavra + curiosidade
+     │                                    ├─ 3. Verdadeiro ou Falso (3 afirmações)
+     │                                    └─ Enter ─► N < 5 ? Fase N+1 : Final (2 telas)
+     │                                                                │
+     └──────────── Esc (a qualquer momento) / fim do Final ◄──────────┘
 ```
+
+**Fluxo da primeira partida e onde o jogador pode travar:**
+
+| Momento | Ação esperada | Retorno ao jogador | Onde pode travar |
+|---|---|---|---|
+| Entrada | Ler a história e entender a missão | Telas com imagem e texto que aparece aos poucos | Criança que ainda não lê com fluência (a narração em áudio ainda não existe) |
+| Aprendizado | Andar, pegar a primeira letra, pular | Dicas do tutorial, uma de cada vez, que somem quando a ação é feita | Não perceber a dica no alto da tela |
+| Desafio | Passar por buraco, onça, piranha e cobra | Aviso antes do perigo (tremor, bolhas); na parte do tutorial, errar não tira vida | Pular cedo demais sobre o rio |
+| Conclusão | Montar a palavra e responder o quiz | Letras verdes/vermelhas, explicação de cada resposta, curiosidade | Não reconhecer a palavra pela dica |
 
 ---
 
@@ -127,6 +153,23 @@ cada fase.
 - Os botões só aceitam resposta 0,25 s depois de aparecerem, para o Enter da tela anterior não
   responder a pergunta sem querer.
 
+### 5.5 Tutorial da fase 1
+
+Segue três ideias: **uma ação por vez**, **tentativa segura** e **retorno perceptível**.
+
+- As dicas aparecem num quadro com borda piscando, logo abaixo da dica do animal, quando o Léo chega a certa coluna do mapa.
+  Cada dica some quando o jogador faz a ação (anda, pega a letra, pula, passa do obstáculo).
+- Sequência: andar → pegar a moeda com letra → onde as letras aparecem → pular → buraco → onça → piranha → cobra → "Agora é com você!".
+- Até a coluna 38 do mapa, errar **não tira vida**. Ao cair, o Léo volta para logo antes do obstáculo da dica atual
+  e aparece "Tudo bem! Tente de novo.".
+- Concluir uma dica toca um som curto de confirmação.
+- Se o jogador passar da parte do tutorial e depois perder as 3 vidas, a fase 1 recomeça sem repetir as dicas.
+
+### 5.6 Tempo de leitura
+
+Como o público está aprendendo a ler, as mensagens ficam mais tempo na tela: 2,5 s por padrão, 3 s para "letra errada"
+e 3,5 s para o nome da fase com a dica. As telas de história, montagem e quiz esperam o jogador apertar Enter.
+
 ---
 
 ## 6. Personagens e perigos
@@ -134,6 +177,7 @@ cada fase.
 | | Descrição | Comportamento |
 |---|---|---|
 | **Léo** (protagonista) | Menino brasileiro de camiseta amarela e short verde | Anda, pula, coleta letras |
+| **Vovó Lúcia** | Avó do Léo, dona do Livro da Floresta | Aparece só na história (citada no começo e no final) |
 | **Onça-pintada** | Inimigo terrestre | Patrulha o trecho de chão onde está, sem cair nos buracos. Velocidade: 28 px/s |
 | **Cobra** | Inimigo suspenso | Fica escondida dentro de um tronco (1,8 s), treme como aviso (0,6 s), desce rápido até a altura do Léo (0,2 s), fica embaixo (1 s) e sobe (0,7 s). Só machuca quando está para fora |
 | **Piranha** | Inimigo aquático | Espera de 1,4 a 2,4 s, solta bolhas como aviso (0,6 s) e pula cerca de 3,5 blocos para fora do rio, girando o corpo, com respingos |
@@ -311,7 +355,8 @@ main.gd
 
 ## 15. Limitações conhecidas
 
-- Não há tutorial interno, só a tela de texto *Como jogar*.
+- O tutorial cobre movimento e perigos. A montagem e o quiz são explicados só pelo texto da tela.
+- Ainda não houve testes com crianças do público-alvo.
 - As 5 fases usam o mesmo mapa.
 - Não há salvamento, recorde, menu de pausa nem controle de volume.
 - Ao recomeçar a fase, os pontos já ganhos são mantidos e as letras podem ser coletadas de novo (falha conhecida).
@@ -324,12 +369,12 @@ main.gd
 
 | Prioridade | Item |
 |---|---|
-| Alta | Tutorial interativo na fase 1 |
+| Alta | Testar com crianças do público-alvo, registrar observações e ajustar |
+| Alta | Narração em áudio da história, das dicas e das perguntas |
 | Alta | Corrigir os pontos que se acumulam ao recomeçar a fase |
 | Alta | Um mapa diferente para cada animal, com dificuldade crescente |
 | Média | Novos desafios: "Quem sou eu?" (silhueta) e "Letra que falta" |
 | Média | Checkpoint e *jump buffer* |
-| Média | Narração em áudio das palavras e curiosidades |
 | Baixa | Recorde salvo, álbum de animais descobertos, mais animais (pirarucu, preguiça, sucuri) |
 | Baixa | Suporte a gamepad e celular |
 
@@ -343,3 +388,4 @@ main.gd
 | 1.1 | 15/10/2026 | Novos inimigos: cobra e piranha. Nova fase: CAPIVARA (8 letras). Ilustrações dos animais refeitas em 96 × 72 |
 | 1.2 | 17/10/2026 | Novo desafio: Verdadeiro ou Falso depois de montar a palavra. Texto do *Como jogar* atualizado |
 | 1.3 | 29/10/2026 | Guia completo de instalação e uso no README, este GDD, executável único para Windows |
+| 1.4 | 12/11/2026 | História do Livro da Floresta (telas de abertura e final), tutorial na fase 1 com tentativa segura, mensagens com mais tempo de leitura, capa do jogo |
