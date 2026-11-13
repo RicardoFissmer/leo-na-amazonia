@@ -1,0 +1,6 @@
+node_modules/
+out/
+gravacoes/
+
+audio/cache/
+public/audio/

@@ -164,6 +164,8 @@ var camadas: Array[Parallax2D] = []
 var faixas_menu: Array[Sprite2D] = []
 var letras_menu: Array[Node2D] = []
 var tempo_menu := 0.0
+var leo_menu: AnimatedSprite2D
+var pulo_menu := 0.0  # tempo restante do pulo do Léo no menu
 
 var tex_ground: Texture2D = load("res://assets/ground.png")
 var tex_dirt: Texture2D = load("res://assets/dirt.png")
@@ -309,11 +311,16 @@ func mostrar_menu() -> void:
 	faixas_menu.append(_faixa(tex_ground, Vector2(0, 9 * TILE), 336, TILE))
 	faixas_menu.append(_faixa(tex_dirt, Vector2(0, 10 * TILE), 336, TILE * 2))
 
-	var leo := AnimatedSprite2D.new()
-	leo.sprite_frames = Util.frames("res://assets/leo.png", 12, 16, {"andando": [[0, 1], 8.0]})
-	leo.position = Vector2(236, 9 * TILE - 8)
-	leo.play("andando")
-	mundo.add_child(leo)
+	leo_menu = AnimatedSprite2D.new()
+	leo_menu.sprite_frames = Util.frames("res://assets/leo.png", 16, 24, {
+		"andando": [[3, 4, 5, 6, 7, 8], 12.0],
+		"pulando": [[9], 1.0],
+		"caindo": [[10], 1.0],
+	})
+	leo_menu.position = Vector2(244, 9 * TILE - 12)
+	leo_menu.play("andando")
+	pulo_menu = 0.0
+	mundo.add_child(leo_menu)
 
 	var onca := AnimatedSprite2D.new()
 	onca.sprite_frames = Util.frames("res://assets/onca.png", 20, 9, {"andando": [[0, 1], 8.0]})
@@ -333,8 +340,11 @@ func mostrar_menu() -> void:
 	for k in 2:
 		var arara := Arara.new()
 		arara.position = Vector2(40 + k * 160, 0)
-		arara.base_y = 72 + k * 10
+		arara.base_y = 96 + k * 12
 		mundo.add_child(arara)
+
+	_vagalumes()
+	_folhas_caindo()
 
 	var cam := Camera2D.new()
 	cam.position = Vector2(160, 90)
@@ -352,6 +362,70 @@ func _animar_menu(delta: float) -> void:
 		l.position.x -= 40.0 * delta
 		if l.position.x < -12.0:
 			l.position.x += 360.0
+			l.modulate.a = 1.0
+			l.scale = Vector2.ONE
+		# o Léo pula para pegar as letras que chegam perto dele
+		var dx := l.position.x - leo_menu.position.x
+		if pulo_menu <= 0.0 and dx > 6.0 and dx < 14.0 and l.modulate.a > 0.5:
+			pulo_menu = 0.55
+		if pulo_menu > 0.0 and absf(dx) < 4.0 and l.modulate.a > 0.5:
+			var tw := l.create_tween()
+			tw.tween_property(l, "scale", Vector2(1.6, 1.6), 0.2)
+			tw.parallel().tween_property(l, "modulate:a", 0.0, 0.2)
+	if pulo_menu > 0.0:
+		pulo_menu = maxf(pulo_menu - delta, 0.0)
+		var p := 1.0 - pulo_menu / 0.55
+		leo_menu.position.y = 9 * TILE - 12 - sin(p * PI) * 26.0
+		leo_menu.play("pulando" if p < 0.5 else "caindo")
+	else:
+		leo_menu.position.y = 9 * TILE - 12
+		leo_menu.play("andando")
+
+
+## Vaga-lumes piscando devagar no meio da mata (só no menu).
+func _vagalumes() -> void:
+	var p := CPUParticles2D.new()
+	p.position = Vector2(160, 110)
+	p.amount = 18
+	p.lifetime = 4.0
+	p.preprocess = 4.0
+	p.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
+	p.emission_rect_extents = Vector2(160, 40)
+	p.direction = Vector2(0, -1)
+	p.spread = 180.0
+	p.gravity = Vector2.ZERO
+	p.initial_velocity_min = 2.0
+	p.initial_velocity_max = 8.0
+	p.scale_amount_min = 1.0
+	p.scale_amount_max = 1.5
+	var cores := Gradient.new()
+	cores.offsets = PackedFloat32Array([0.0, 0.3, 0.6, 1.0])
+	cores.colors = PackedColorArray([Color(1, 0.95, 0.5, 0), Color(1, 0.95, 0.5, 0.9),
+		Color(0.9, 1, 0.5, 0.5), Color(1, 0.95, 0.5, 0)])
+	p.color_ramp = cores
+	mundo.add_child(p)
+
+
+## Folhas caindo e girando com o vento.
+func _folhas_caindo() -> void:
+	var p := CPUParticles2D.new()
+	p.texture = load("res://assets/ui/folha.png")
+	p.position = Vector2(200, -8)
+	p.amount = 7
+	p.lifetime = 7.0
+	p.preprocess = 7.0
+	p.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
+	p.emission_rect_extents = Vector2(200, 4)
+	p.direction = Vector2(-1, 1)
+	p.spread = 20.0
+	p.gravity = Vector2(-6, 10)
+	p.initial_velocity_min = 8.0
+	p.initial_velocity_max = 18.0
+	p.angular_velocity_min = -90.0
+	p.angular_velocity_max = 90.0
+	p.angle_min = 0.0
+	p.angle_max = 360.0
+	mundo.add_child(p)
 
 
 func iniciar_jogo() -> void:
@@ -469,7 +543,7 @@ func carregar_nivel(i: int) -> void:
 			var centro := Vector2(x * TILE + 8, y * TILE + 8)
 			match ch:
 				"P":
-					inicio = centro
+					inicio = centro + Vector2(0, -4)  # o Léo tem 24 px de altura: os pés ficam no chão
 				"O":
 					_criar_onca(x, y)
 				"x":
@@ -634,6 +708,7 @@ func _ao_coletar(letra: String, no: Area2D) -> void:
 func _abrir_montagem() -> void:
 	montando = true
 	jogador.travado = true
+	jogador.comemorando = true
 	tutorial.esconder()
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()

@@ -14,6 +14,8 @@ sobre a fauna amazônica (arara, onça-pintada, boto-cor-de-rosa, tucano e capiv
 - **Público:** crianças em fase de alfabetização (aproximadamente 6 a 10 anos)
 - **Idioma:** português
 - **Documento de design (GDD):** [docs/GDD.md](docs/GDD.md)
+- **Vídeo de apresentação (90 s):** [assistir / baixar](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.6/leo-na-amazonia-video.mp4)
+  — o Léo se apresenta e mostra o jogo. Como foi feito: [video/LEIAME.md](video/LEIAME.md)
 
 ---
 
@@ -131,11 +133,12 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --export-release "Wind
 
 ### Iniciando uma partida
 
-1. Ao abrir o jogo aparece a **tela inicial** com três botões:
-   - **Jogar** — começa a partida na fase 1;
+1. Ao abrir o jogo aparece a **tela inicial**, com o logo e quatro placas de madeira:
+   - **Jogar** — começa a partida (história + fase 1);
    - **Como jogar** — mostra um resumo das regras e dos controles;
+   - **Modo retrô** — liga/desliga o visual de TV antiga (o mesmo da tecla R);
    - **Sair** — fecha o jogo.
-2. Escolha com o **mouse** ou com as **setas ↑ ↓ + Enter**.
+2. Escolha com o **mouse** ou com as **setas ↑ ↓ + Enter**. A cabeça do Léo marca o botão selecionado.
 3. Ao clicar em **Jogar**, aparece a **história** em 3 telas: o *Livro da Floresta* da vovó Lúcia perdeu as
    letras numa ventania, e o Léo vai à mata devolver o nome de cada animal.
    **Enter**, **Espaço** ou um clique passam de tela. **Esc** pula a história.
@@ -260,7 +263,7 @@ passando pelas **5 fases**: **ARARA → ONÇA → BOTO → TUCANO → CAPIVARA**
 - Controle de volume e opção de texto maior.
 - Um mapa diferente para cada animal, com dificuldade crescente.
 - Novos tipos de desafio: **"Quem sou eu?"** (silhueta do animal) e **"Letra que falta"**.
-- *Checkpoint* no meio da fase e *jump buffer* (aceitar o pulo apertado um pouco antes de tocar o chão).
+- *Checkpoint* no meio da fase.
 - Narração em áudio das palavras e curiosidades, para quem ainda está aprendendo a ler.
 - Salvar o recorde e mostrar um álbum dos animais descobertos.
 - Suporte a gamepad e a celular.
@@ -298,7 +301,8 @@ assets/historia/     imagens das telas da história (96×72)
 sons/                música (musica.ogg) e efeitos sonoros (.wav)
 docs/GDD.md          documento de design do jogo
 capa/                capa do jogo (1920x1080, 1280x640 e 320x180)
-tools/               gerador de arte e da capa em Python e prévias das imagens (o Godot ignora esta pasta)
+video/               vídeo de apresentação (roteiro, projeto Remotion, trilha) — ver video/LEIAME.md
+tools/               geradores de arte em Python (Léo, retrato, menu, animais, história, capa) e prévias
 ```
 
 ---
@@ -320,6 +324,8 @@ tools/               gerador de arte e da capa em Python e prévias das imagens 
   As imagens são geradas por `py tools/gerar_historia.py`.
 - **Dicas do tutorial:** a lista `PASSOS` no começo de `scripts/tutorial.gd` diz em que coluna do mapa cada dica
   aparece e o que o jogador precisa fazer para ela sumir.
+- **Léo:** o sprite (16×24, 13 quadros) é desenhado por `py tools/gerar_leo.py`; o retrato grande do vídeo,
+  por `py tools/gerar_retrato.py`. As imagens do menu (logo, placas, cursor) vêm de `py tools/gerar_ui.py`.
 - **Capa:** rode `py tools/gerar_capa.py` (usa as mesmas imagens do jogo; regrava os arquivos em `capa/`).
 - **Efeitos de tela:** a intensidade da vinheta, da cor, das linhas do modo retrô e a duração da transição ficam
   no começo de `scripts/efeitos.gd`.

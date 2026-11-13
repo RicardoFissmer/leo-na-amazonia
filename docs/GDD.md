@@ -1,8 +1,8 @@
 # GDD — Léo na Amazônia
 
 **Documento de Design do Jogo**
-Versão do documento: 1.5 — atualizado em 12/11/2026
-Versão do jogo descrita: 1.5 (Godot 4.7.2)
+Versão do documento: 1.6 — atualizado em 12/11/2026
+Versão do jogo descrita: 1.6 (Godot 4.7.2)
 
 ---
 
@@ -130,6 +130,9 @@ O texto é mostrado aos poucos e pode ser pulado com Esc.
 | *Coyote time* | 0,1 s | Ainda dá para pular logo depois de sair da beirada |
 | Pulo variável | — | Soltar o botão cedo corta a subida (pulo baixo) |
 | Invencibilidade após dano | 1,2 s | O Léo pisca e é empurrado para trás |
+| *Jump buffer* | 0,12 s | Apertar o pulo um pouco antes de tocar o chão também vale |
+| Esticar e achatar | — | O corpo estica no pulo (0,8 × 1,2) e achata ao aterrissar, voltando ao normal aos poucos |
+| Poeira | — | Nuvenzinha nos pés ao pular, ao aterrissar (maior se a queda foi alta) e enquanto corre |
 
 ### 5.2 Coleta de letras
 
@@ -273,8 +276,10 @@ Exemplo para a ARARA: 50 + 50 + 60 = 160.
 
 ## 10. Interface (UI/HUD)
 
-- **Tela inicial:** título animado, botões *Jogar*, *Como jogar* e *Sair*. Ao fundo, o Léo corre
-  enquanto as letras de "AMAZONIA" passam pela tela.
+- **Tela inicial:** logo em pixel art (o mesmo da capa) que balança e solta brilhos; placas de madeira
+  *Jogar*, *Como jogar*, *Modo retrô* e *Sair*; a cabeça do Léo marca o botão selecionado e o botão "pula" ao
+  ser escolhido. Ao fundo, a mata anda sozinha: o Léo corre e pula para pegar as letras de "AMAZONIA", a onça
+  corre atrás, há vaga-lumes e folhas caindo. Versão do jogo no canto.
 - **HUD na fase:** letras coletadas e espaços vazios (`_`) no canto superior esquerdo, dica logo abaixo,
   corações e pontos no canto superior direito, e mensagens temporárias no centro.
 - **Tela de montagem:** imagem do animal (96 × 72), dica, espaços da palavra e letras disponíveis.
@@ -304,7 +309,9 @@ Exemplo para a ARARA: 50 + 50 + 60 = 160.
 - **Estilo:** pixel art, com contorno escuro, sombreamento em 3–4 tons e luz vindo de cima à esquerda.
 - **Resolução interna:** 320 × 180 px, ampliada por um número inteiro de vezes (janela de 1280 × 720 por padrão)
   com filtro *nearest*, para os pixels ficarem nítidos.
-- **Blocos:** 16 × 16 px. Léo: 12 × 16 px (3 quadros). Onça: 20 × 9 px. Cobra: cabeça 10 × 10 + corpo
+- **Blocos:** 16 × 16 px. **Léo: 16 × 24 px, 13 quadros** — parado respirando (2) e piscando (1), corrida (6),
+  pulo, queda, dano e comemoração; rosto em 3/4 com dois olhos, cabelo alto e cacheado, camisa amarela com gola
+  verde e escudo azul, short verde e tênis azul. Onça: 20 × 9 px. Cobra: cabeça 10 × 10 + corpo
   que se repete. Piranha: 14 × 11 px (2 quadros).
 - **Fundo:** três camadas com *parallax* (0,15 / 0,4 / 0,8 da velocidade da câmera). No menu, elas andam sozinhas.
 - **Ilustrações dos animais:** 96 × 72 px, com cenário próprio (galho, mata, rio). São geradas pelo
@@ -389,7 +396,7 @@ main.gd
 | Alta | Corrigir os pontos que se acumulam ao recomeçar a fase |
 | Alta | Um mapa diferente para cada animal, com dificuldade crescente |
 | Média | Novos desafios: "Quem sou eu?" (silhueta) e "Letra que falta" |
-| Média | Checkpoint e *jump buffer* |
+| Média | Checkpoint no meio da fase |
 | Baixa | Recorde salvo, álbum de animais descobertos, mais animais (pirarucu, preguiça, sucuri) |
 | Baixa | Suporte a gamepad e celular |
 
@@ -405,3 +412,4 @@ main.gd
 | 1.3 | 29/10/2026 | Guia completo de instalação e uso no README, este GDD, executável único para Windows |
 | 1.4 | 12/11/2026 | História do Livro da Floresta (telas de abertura e final), tutorial na fase 1 com tentativa segura, mensagens com mais tempo de leitura, capa do jogo |
 | 1.5 | 12/11/2026 | Efeitos de tela com o VesperaFX: vinheta e cor no cenário, transição pixelada entre telas e modo retrô opcional (tecla R / menu) |
+| 1.6 | 12/11/2026 | Léo redesenhado (16×24, 13 quadros, esticar/achatar, poeira, *jump buffer*), menu novo (logo, placas de madeira, cursor do Léo, cena viva) e vídeo de apresentação |

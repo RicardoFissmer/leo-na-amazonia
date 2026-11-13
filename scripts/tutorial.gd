@@ -5,7 +5,7 @@ extends CanvasLayer
 ## ele volta para um ponto logo antes do obstáculo.
 
 const TILE := 16
-const CHAO_Y := 136.0      # y do Léo em pé no chão
+const CHAO_Y := 132.0      # y do Léo em pé no chão
 const FIM_DA_ZONA := 38    # coluna do mapa onde termina a parte protegida
 
 ## Cada passo aparece quando o Léo chega na coluna "de" e some quando a condição "ate" acontece:
