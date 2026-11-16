@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Plano de Gestão de Configuração
+    url: https://github.com/RicardoFissmer/leo-na-amazonia/blob/main/docs/PLANO_GCS.md
+    about: Como as mudanças entram no jogo (issue → branch → PR → revisão → merge).

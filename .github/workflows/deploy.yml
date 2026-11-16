@@ -1,0 +1,116 @@
+# Entrega: a cada merge na main (ou manualmente), gera o jogo para Web e passa pelos environments.
+#   build          -> exporta o jogo para Web (HTML5)
+#   staging        -> build disponível como artifact para teste (environment "staging")
+#   production     -> PORTÃO DE APROVAÇÃO: só continua depois que o revisor obrigatório aprova (environment "production")
+#   publicar-pages -> publica no GitHub Pages (environment "github-pages", exigido pelo próprio Pages)
+# Ver docs/PLANO_GCS.md, seção 8.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissão mínima por padrão; só o job que publica no Pages recebe mais.
+permissions:
+  contents: read
+
+# Um deploy por vez; um novo não cancela o que está esperando aprovação.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    container:
+      image: barichello/godot-ci:4.7.2
+    outputs:
+      artifact_url: ${{ steps.artifact.outputs.artifact-url }}
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v7
+
+      - name: Preparar os templates de exportação
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable \
+             ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Importar e exportar para Web
+        run: |
+          godot --headless --import
+          mkdir -p build/web
+          godot --headless --export-release "Web" build/web/index.html
+          test -s build/web/index.html && test -s build/web/index.pck && test -s build/web/index.wasm
+          ls -lh build/web
+
+      - name: Guardar o build (artifact para o staging)
+        id: artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: jogo-web-${{ github.sha }}
+          path: build/web
+          retention-days: 30
+
+      - name: Preparar o pacote do GitHub Pages
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: build/web
+
+  staging:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ needs.build.outputs.artifact_url }}
+    steps:
+      - name: Publicar o link do build de teste
+        run: |
+          {
+            echo "## Staging pronto para teste"
+            echo ""
+            echo "- Commit: \`${GITHUB_SHA}\`"
+            echo "- Build Web: [baixar o artifact](${{ needs.build.outputs.artifact_url }})"
+            echo ""
+            echo "Para testar: descompacte e sirva a pasta com um servidor local"
+            echo "(ex.: \`python -m http.server\` dentro da pasta) e abra http://localhost:8000."
+            echo ""
+            echo "Se estiver tudo certo, aprove o environment **production** (Review deployments)."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  production:
+    needs: staging
+    runs-on: ubuntu-latest
+    # Required reviewer = RicardoFissmer (configurado em Settings > Environments > production).
+    environment:
+      name: production
+      url: https://ricardofissmer.github.io/leo-na-amazonia/
+    steps:
+      - name: Registrar a aprovação
+        run: |
+          {
+            echo "## Production aprovado"
+            echo ""
+            echo "- Commit: \`${GITHUB_SHA}\`"
+            echo "- Disparado por: @${GITHUB_ACTOR}"
+            echo "- Próximo passo: publicar no GitHub Pages e criar a tag de baseline (vX.Y.Z)."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  publicar-pages:
+    needs: production
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

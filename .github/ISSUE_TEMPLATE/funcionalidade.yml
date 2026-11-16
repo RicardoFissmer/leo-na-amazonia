@@ -1,0 +1,38 @@
+name: Nova funcionalidade
+description: Sugerir algo novo para o jogo (fase, animal, desafio, melhoria)
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: ideia
+    attributes:
+      label: Qual é a ideia?
+      placeholder: "Ex.: uma fase nova com o pirarucu e um desafio de \"letra que falta\"."
+    validations:
+      required: true
+  - type: textarea
+    id: por-que
+    attributes:
+      label: Por que isso melhora o jogo?
+      description: Pense na criança que vai jogar (diversão, aprendizado, acessibilidade).
+    validations:
+      required: true
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Como saber que ficou pronto? (critérios de aceite)
+      placeholder: |
+        - [ ] A fase nova aparece depois da CAPIVARA
+        - [ ] O GDD foi atualizado
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - Jogabilidade
+        - Conteúdo educativo (palavras, perguntas)
+        - Arte / som
+        - Interface / menus
+        - Documentação / processo

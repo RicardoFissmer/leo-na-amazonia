@@ -1,0 +1,4 @@
+# Dono de todos os arquivos do repositório (projeto individual).
+# A regra "Require review from Code Owners" fica desligada: o autor não pode aprovar o próprio PR
+# (ver docs/PLANO_GCS.md, seção 2).
+* @RicardoFissmer

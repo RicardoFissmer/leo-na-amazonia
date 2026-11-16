@@ -10,10 +10,15 @@ sobre a fauna amazônica (arara, onça-pintada, boto-cor-de-rosa, tucano e capiv
 
 ![Animais do jogo](tools/preview/animais.png)
 
+> ### ▶ [Jogar online agora](https://ricardofissmer.github.io/leo-na-amazonia/)
+> Versão Web no GitHub Pages — funciona no navegador do computador, sem instalar nada.
+> Versão para Windows: [Releases](https://github.com/RicardoFissmer/leo-na-amazonia/releases/latest).
+
 - **Gênero:** plataforma 2D + quebra-cabeça de palavras + quiz
 - **Público:** crianças em fase de alfabetização (aproximadamente 6 a 10 anos)
 - **Idioma:** português
 - **Documento de design (GDD):** [docs/GDD.md](docs/GDD.md)
+- **Plano de Gestão de Configuração:** [docs/PLANO_GCS.md](docs/PLANO_GCS.md)
 - **Vídeo de apresentação (90 s):** [assistir / baixar](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.6/leo-na-amazonia-video.mp4)
   — o Léo se apresenta e mostra o jogo. Como foi feito: [video/LEIAME.md](video/LEIAME.md)
 
@@ -31,6 +36,7 @@ sobre a fauna amazônica (arara, onça-pintada, boto-cor-de-rosa, tucano e capiv
 8. [Estrutura do projeto](#8-estrutura-do-projeto)
 9. [Como modificar o jogo](#9-como-modificar-o-jogo)
 10. [Créditos e licenças](#10-créditos-e-licenças)
+11. [Fluxo de trabalho e gestão de configuração](#11-fluxo-de-trabalho-e-gestão-de-configuração)
 
 ---
 
@@ -338,3 +344,32 @@ tools/               geradores de arte em Python (Léo, retrato, menu, animais, 
   [Mozilla Public License 2.0](shaders/vesperafx/LICENSE.txt). Usamos `crt`, `pixelation`, `rendering` e `utils`
   sem modificação (detalhes em [shaders/vesperafx/LEIAME.md](shaders/vesperafx/LEIAME.md)).
 - **Engine:** [Godot Engine](https://godotengine.org) (licença MIT), com a fonte padrão do Godot.
+
+---
+
+## 11. Fluxo de trabalho e gestão de configuração
+
+O repositório segue um [Plano de Gestão de Configuração](docs/PLANO_GCS.md). Em resumo:
+
+1. **Issue** — toda mudança começa por uma issue (modelos de *Bug* e *Nova funcionalidade*).
+2. **Branch curta** a partir da `main`: `feature/`, `fix/`, `hotfix/`, `docs/` ou `chore/`.
+3. **Commits** no padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/) (`feat:`, `fix:`, `docs:`, `ci:`, `chore:`).
+4. **Pull Request** para a `main` → o **CI** (`validar-godot`) importa o projeto no Godot 4.7.2 e faz um export Web de teste.
+5. **Autorrevisão** com o checklist do template → **merge** (projeto individual: PR e CI obrigatórios, 0 aprovações).
+6. **Deploy:** o merge gera o build Web em **`staging`** (artifact para teste); depois da aprovação do dono em
+   **`production`**, o jogo é publicado no **GitHub Pages**.
+7. **Baseline:** cada publicação aprovada vira uma tag SemVer (`vMAJOR.MINOR.PATCH`), a começar por `v1.7.0`.
+
+A `main` é protegida: **não aceita push direto** (nem do dono), exige PR aprovado e CI verde, e bloqueia force push e
+exclusão. As configurações feitas na interface do GitHub estão em [docs/CONFIGURACAO_GITHUB.md](docs/CONFIGURACAO_GITHUB.md).
+
+### Exportar para Web localmente
+
+```bash
+Godot_v4.7.2-stable_win64_console.exe --headless --path . --export-release "Web" build/web/index.html
+```
+
+O preset **Web** fica sem threads (`variant/thread_support=false`) para rodar no GitHub Pages. Para testar, sirva a
+pasta `build/web` com um servidor local (por exemplo, `python -m http.server` dentro dela) — abrir o `index.html`
+direto pelo arquivo não funciona.
+
