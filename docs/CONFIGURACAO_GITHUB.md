@@ -4,11 +4,10 @@ Guia das configurações que **não ficam em arquivos** do repositório e precis
 (Settings). Elas completam o [Plano de GCS](PLANO_GCS.md).
 
 - Repositório: <https://github.com/RicardoFissmer/leo-na-amazonia>
-- Dono / gerente de configuração: **@RicardoFissmer**
-- Revisor (par de revisão): **@USUARIO_DO_COLEGA** *(trocar pelo usuário real)*
+- Dono / gerente de configuração / revisor: **@RicardoFissmer** (projeto individual)
 
-> **Ordem recomendada:** 1 → 2 → 5 → 4 → 3. A regra da `main` (passo 3) por último, porque o status check do CI
-> só aparece na busca depois que o workflow rodou uma vez no Pull Request (ver dica no passo 3).
+> **Ordem recomendada:** 1 → 5 → 4 → 3. O CI já rodou no Pull Request #1, então o status check `validar-godot`
+> já aparece na busca do passo 3.
 
 ---
 
@@ -21,25 +20,19 @@ funcionam em repositórios públicos.
 2. Em **General**, role até **Danger Zone** → **Change repository visibility**.
 3. Confirme que está **Public**. *(Este repositório já está público; só confira.)*
 
-## 2. Colega com acesso de escrita
+## 2. Colaborador revisor — não aplicado
 
-**Por quê:** o colega é o par de revisão. Ele precisa de escrita para ser um revisor que conta para a regra de
-aprovação da `main`.
+O projeto é individual, então **não há colaborador revisor** e a regra da `main` exige **0 aprovações**
+(ver [Plano de GCS, seção 2](PLANO_GCS.md#2-papéis-e-responsabilidades)). Se um dia houver um revisor:
 
-1. **Settings** → **Collaborators** (seção *Access*, no menu da esquerda).
-2. **Add people** → digite o usuário do colega → **Add … to this repository**.
-3. O colega recebe um convite por e-mail/notificação e precisa **aceitar** (em
-   <https://github.com/RicardoFissmer/leo-na-amazonia/invitations> ou pelo e-mail).
-4. Depois de aceito, ele aparece na lista com **Role: Collaborator**.
-
-> Em repositório de **conta pessoal** (como este), o GitHub não mostra um seletor de papel: todo colaborador recebe
-> leitura **e escrita** (*Write*). Se o professor pedir o print com "Write", mostre esta tela e, se quiser, a página
-> do colega em *Settings → Collaborators*, que lista as permissões de colaborador (push, criar branches, revisar PRs).
+1. **Settings** → **Collaborators** → **Add people** → usuário da pessoa → ela aceita o convite
+   (em repositório de conta pessoal, todo colaborador recebe escrita).
+2. **Settings** → **Rules** → **Rulesets** → `proteger-main` → *Required approvals* de `0` para `1`.
 
 ## 3. Proteção da `main` (Ruleset)
 
-**Por quê:** garante que nada entra na `main` sem Pull Request aprovado e CI verde — nem o próprio dono. É isso que
-gera a evidência do push recusado.
+**Por quê:** garante que nada entra na `main` sem Pull Request e CI verde — nem o próprio dono. É isso que gera a
+evidência do push recusado.
 
 1. **Settings** → **Rules** → **Rulesets** → **New ruleset** → **New branch ruleset**.
 2. **Ruleset name:** `proteger-main`.
@@ -50,21 +43,17 @@ gera a evidência do push recusado.
 6. Em **Branch rules**, marque:
    - [x] **Restrict deletions** — ninguém apaga a `main`.
    - [x] **Require a pull request before merging**
-     - **Required approvals:** `1`
-     - [x] **Dismiss stale pull request approvals when new commits are pushed** — se mudar o código depois da
-       aprovação, o colega precisa aprovar de novo.
-     - [ ] **Require review from Code Owners** — **deixe desmarcado** (o CODEOWNERS só tem você, e você não pode
-       aprovar o próprio PR; se marcar, nenhum PR seu consegue ser aprovado).
+     - **Required approvals:** `0` — o GitHub não deixa o autor aprovar o próprio PR; com `1` e sem outro
+       colaborador, nenhum PR entraria. O Pull Request continua **obrigatório**.
+     - [ ] **Require review from Code Owners** — **deixe desmarcado** (pelo mesmo motivo).
    - [x] **Require status checks to pass**
      - **Add checks** → digite **`validar-godot`** e selecione.
      - [x] **Require branches to be up to date before merging** (opcional, recomendado).
    - [x] **Block force pushes**
 7. **Create**.
 
-> **Dica sobre o status check:** o nome `validar-godot` só aparece na busca depois que o workflow **CI** rodou pelo
-> menos uma vez. Se ele não aparecer, crie o ruleset com as outras regras agora e, assim que o Pull Request
-> `chore/gcs-setup` mostrar o check **CI / validar-godot**, volte em **Settings → Rules → Rulesets → proteger-main**,
-> adicione o check e salve (antes do merge).
+> **Dica sobre o status check:** se `validar-godot` não aparecer na busca, digite o nome inteiro e confira se o
+> Pull Request #1 já mostra o check **CI / validar-godot** com sucesso (ele já rodou uma vez).
 
 ## 4. Environments `staging` e `production`
 

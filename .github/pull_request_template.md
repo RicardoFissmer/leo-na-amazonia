@@ -16,7 +16,7 @@ Closes #
 
 ## Como testar
 
-<!-- Passos para o revisor conferir. Ex.: "Abra no Godot 4.7, F5, jogue a fase 1 até o rio." -->
+<!-- Passos para conferir a mudança. Ex.: "Abra no Godot 4.7, F5, jogue a fase 1 até o rio." -->
 1.
 2.
 

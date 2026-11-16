@@ -355,7 +355,7 @@ O repositório segue um [Plano de Gestão de Configuração](docs/PLANO_GCS.md).
 2. **Branch curta** a partir da `main`: `feature/`, `fix/`, `hotfix/`, `docs/` ou `chore/`.
 3. **Commits** no padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/) (`feat:`, `fix:`, `docs:`, `ci:`, `chore:`).
 4. **Pull Request** para a `main` → o **CI** (`validar-godot`) importa o projeto no Godot 4.7.2 e faz um export Web de teste.
-5. **Revisão** do par (1 aprovação obrigatória) → **merge**.
+5. **Autorrevisão** com o checklist do template → **merge** (projeto individual: PR e CI obrigatórios, 0 aprovações).
 6. **Deploy:** o merge gera o build Web em **`staging`** (artifact para teste); depois da aprovação do dono em
    **`production`**, o jogo é publicado no **GitHub Pages**.
 7. **Baseline:** cada publicação aprovada vira uma tag SemVer (`vMAJOR.MINOR.PATCH`), a começar por `v1.7.0`.

@@ -38,15 +38,24 @@ pasta `.godot/` (cache local do editor).
 | **Dono do projeto** | Ricardo (@RicardoFissmer) | Decide o que entra no jogo, abre as issues, desenvolve nas branches. |
 | **Gerente de configuração** | Ricardo (@RicardoFissmer) | Mantém este plano, as regras da `main`, os environments e os workflows; cria as tags de baseline e as Releases; faz o merge dos PRs aprovados. |
 | **Revisor obrigatório de `production`** | Ricardo (@RicardoFissmer) | Testa o build de `staging` e aprova (ou rejeita) a publicação no GitHub Pages. |
-| **Revisor de código (par de revisão)** | Colega (@USUARIO_DO_COLEGA) | Tem acesso de escrita. Revisa e aprova os Pull Requests para a `main` (1 aprovação obrigatória). |
+| **Revisor dos Pull Requests** | Ricardo (@RicardoFissmer) | Faz a autorrevisão de cada PR com o checklist do template antes do merge. |
 
-**Por que o revisor dos PRs é o colega e não o dono:** o GitHub não deixa o autor aprovar o próprio PR. Como o
-projeto é individual, o colega garante o "segundo par de olhos" que a regra da `main` exige.
+**Projeto individual, sem par de revisão.** O projeto tem uma única pessoa, e o GitHub não deixa o autor aprovar o
+próprio Pull Request. Por isso a regra da `main` exige o **Pull Request** e o **CI verde**, mas **0 aprovações**: com
+1 aprovação obrigatória e nenhum outro colaborador, nenhum PR conseguiria entrar. A falta do segundo par de olhos é
+compensada por três controles que não dependem de outra pessoa:
 
-**CODEOWNERS:** o arquivo `.github/CODEOWNERS` tem só o Ricardo (`* @RicardoFissmer`), para o GitHub sempre marcá-lo
-nos PRs. O colega **não** foi incluído e a opção *Require review from Code Owners* fica **desligada**: se ficasse
-ligada, todo PR do Ricardo precisaria da aprovação do próprio Ricardo, o que o GitHub não permite — os PRs
-travariam. A revisão do colega já é garantida pela regra de 1 aprovação.
+1. o **CI** (`validar-godot`) bloqueia o merge se o jogo não abrir ou não exportar para Web;
+2. a **autorrevisão** do PR com o checklist do template (testei no Godot, não movi arquivos, padrões do plano);
+3. o **portão de `production`**: nada chega aos jogadores sem o teste em `staging` e a aprovação explícita.
+
+> **Item não aplicado nesta entrega:** o *par de revisão com acesso de escrita* (colaborador revisor). Para ativar
+> quando houver um revisor: adicioná-lo em **Settings → Collaborators** (escrita) e mudar *Required approvals* do
+> ruleset `proteger-main` de `0` para `1` (seção 9). O resto do processo não muda.
+
+**CODEOWNERS:** o arquivo `.github/CODEOWNERS` tem o Ricardo (`* @RicardoFissmer`) como dono de tudo, o que deixa
+explícito no GitHub quem responde por cada arquivo. A opção *Require review from Code Owners* fica **desligada**:
+ligada, todo PR do Ricardo exigiria a aprovação do próprio Ricardo, o que o GitHub não permite.
 
 ## 3. Itens de configuração (ICs)
 
@@ -136,7 +145,7 @@ main  ──●───────────●─────────�
 - Cada mudança nasce em uma **branch curta** a partir da `main` atualizada e morre no merge (a branch é apagada).
 - Não há branch `develop` nem branches de release.
 
-**Por que GitHub Flow e não Git Flow:** o projeto tem **uma pessoa desenvolvendo e um revisor**, entregas pequenas e
+**Por que GitHub Flow e não Git Flow:** o projeto tem **uma pessoa só**, entregas pequenas e
 um único produto publicado (o jogo Web). O Git Flow (develop, release, hotfix em paralelo) traria cerimônia sem
 benefício. A "estabilização" que o Git Flow faria em uma branch de release aqui é feita pelo environment `staging`,
 e a decisão de publicar é feita pelo portão de aprovação de `production`.
@@ -144,11 +153,10 @@ e a decisão de publicar é feita pelo portão de aprovação de `production`.
 ## 6. Controle de mudanças
 
 ```
-Issue ─▶ Branch ─▶ Commits ─▶ Pull Request ─▶ CI (validar-godot) ─▶ Revisão do colega ─▶ Merge ─▶ Deploy
+Issue ─▶ Branch ─▶ Commits ─▶ Pull Request ─▶ CI (validar-godot) ─▶ Autorrevisão ─▶ Merge ─▶ Deploy
   │                                                │                     │
-  │                                                └─ falhou: corrige na └─ pediu alterações: novos commits
-  │                                                   mesma branch          na mesma branch, CI roda de novo,
-  │                                                                         aprovação anterior é descartada
+  │                                                └─ falhou: corrige na └─ achou problema: novos commits
+  │                                                   mesma branch          na mesma branch, CI roda de novo
   └─ toda mudança começa aqui (template de bug ou de funcionalidade)
 ```
 
@@ -157,17 +165,18 @@ Issue ─▶ Branch ─▶ Commits ─▶ Pull Request ─▶ CI (validar-godot)
 3. **Commits** — pequenos, no padrão Conventional Commits.
 4. **Pull Request** para a `main` — usa o template (o que mudou, `Closes #N`, como testar, checklist).
 5. **CI** — o workflow `CI` roda o job **`validar-godot`**: importa o projeto no Godot 4.7.2, roda a cena principal
-   procurando erros de script e faz um export Web de teste. O build fica como artifact do PR para quem revisa jogar.
+   procurando erros de script e faz um export Web de teste. O build fica como artifact do PR para ser jogado.
    **Sem CI verde, o merge fica bloqueado.**
-6. **Revisão** — o colega revisa o código e, se quiser, joga o build do artifact.
-   - **Aprovou:** o PR fica pronto para merge.
-   - **Pediu alterações (*Request changes*):** o autor faz novos commits **na mesma branch**; o CI roda de novo e,
-     como a regra descarta aprovações antigas quando chegam commits novos, o colega precisa **revisar e aprovar
-     outra vez**. O PR só sai desse ciclo aprovado ou fechado (mudança rejeitada, issue fechada com justificativa).
+6. **Autorrevisão** — o Ricardo lê o diff na aba *Files changed*, joga o build do artifact e marca o checklist do
+   template.
+   - **Tudo certo:** o PR fica pronto para merge.
+   - **Achou um problema (ou o CI falhou):** novos commits **na mesma branch**; o CI roda de novo e o checklist é
+     conferido outra vez. O PR só sai desse ciclo pronto ou fechado (mudança rejeitada, issue fechada com
+     justificativa).
 7. **Merge** — feito pelo Ricardo (*Squash and merge* ou *Merge commit*), branch apagada.
 8. **Deploy** — o merge dispara o workflow `Deploy` (seção 8).
 
-A issue fecha sozinha no merge (`Closes #N`), ligando pedido → código → revisão → deploy.
+A issue fecha sozinha no merge (`Closes #N`), ligando pedido → código → validação → deploy.
 
 ## 7. Baselines e releases
 
@@ -223,8 +232,7 @@ Configurada como **ruleset `proteger-main`** (Settings → Rules → Rulesets), 
 
 | Regra | Por quê |
 |---|---|
-| **Require a pull request before merging**, 1 aprovação | Nenhuma linha entra sem passar pelo par de revisão. |
-| **Dismiss stale approvals** ao chegar commit novo | A aprovação vale para o código que foi revisado, não para o que veio depois. |
+| **Require a pull request before merging**, **0 aprovações** | Nenhuma linha entra sem Pull Request (rastreável, com CI e checklist). As aprovações ficam em 0 porque o projeto é individual e o autor não pode aprovar o próprio PR (seção 2). |
 | **Require status checks to pass: `validar-godot`** | Garante que o jogo abre e exporta para Web antes de entrar na `main` (que vira deploy). |
 | **Block force pushes** | Ninguém reescreve o histórico da `main` — a auditoria depende dele. |
 | **Restrict deletions** | A `main` não pode ser apagada. |
@@ -238,7 +246,7 @@ Configurada como **ruleset `proteger-main`** (Settings → Rules → Rulesets), 
 | O que auditar | Onde |
 |---|---|
 | Pedidos de mudança | Aba **Issues** (abertas/fechadas, ligadas aos PRs) |
-| Quem mudou o quê e quem revisou | Aba **Pull requests** → *Closed* → cada PR mostra commits, CI e a aprovação do revisor |
+| Quem mudou o quê e por quê | Aba **Pull requests** → *Closed* → cada PR mostra a issue, os commits, o CI e o checklist |
 | Validação automática | Aba **Actions** → workflow **CI** (logs do `validar-godot` de cada PR) |
 | Deploys e aprovações | Aba **Actions** → workflow **Deploy** (quem aprovou `production` e quando) e a página **Deployments** (`/deployments`) com o histórico por environment |
 | Baselines | `git tag -l "v*"` ou a página **Releases** / **Tags** |
@@ -247,12 +255,12 @@ Configurada como **ruleset `proteger-main`** (Settings → Rules → Rulesets), 
 
 ### Evidências da entrega N2-P2
 
-- [ ] `docs/PLANO_GCS.md` publicado na `main` (via PR aprovado)
+- [ ] `docs/PLANO_GCS.md` publicado na `main` (via Pull Request)
 - [ ] Repositório público
 - [ ] Terminal com o `git push` direto na `main` **recusado** pelo GitHub
 - [ ] Ruleset `proteger-main` configurado (print da tela de regras)
-- [ ] Colega como colaborador com escrita (print de Settings → Collaborators)
-- [ ] PR `chore/gcs-setup` revisado e aprovado pelo colega
+- [ ] PR `chore/gcs-setup` com CI verde e merge na `main`
+- [ ] *(Não aplicado: par de revisão com acesso de escrita — projeto individual, ver seção 2)*
 - [ ] Environments `staging` e `production`, com Ricardo como *required reviewer*
 - [ ] Execução do `Deploy` com `production` aguardando aprovação e depois aprovado
 - [ ] Jogo publicado no GitHub Pages
