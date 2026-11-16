@@ -4,7 +4,8 @@ Guia das configurações que **não ficam em arquivos** do repositório e precis
 (Settings). Elas completam o [Plano de GCS](PLANO_GCS.md).
 
 - Repositório: <https://github.com/RicardoFissmer/leo-na-amazonia>
-- Dono / gerente de configuração / revisor: **@RicardoFissmer** (projeto individual)
+- Dono / gerente de configuração: **@RicardoFissmer**
+- Revisor (par de revisão): **@BryanBellinaso**
 
 > **Ordem recomendada:** 1 → 5 → 4 → 3. O CI já rodou no Pull Request #1, então o status check `validar-godot`
 > já aparece na busca do passo 3.
@@ -20,14 +21,16 @@ funcionam em repositórios públicos.
 2. Em **General**, role até **Danger Zone** → **Change repository visibility**.
 3. Confirme que está **Public**. *(Este repositório já está público; só confira.)*
 
-## 2. Colaborador revisor — não aplicado
+## 2. Colaborador revisor com acesso de escrita
 
-O projeto é individual, então **não há colaborador revisor** e a regra da `main` exige **0 aprovações**
-(ver [Plano de GCS, seção 2](PLANO_GCS.md#2-papéis-e-responsabilidades)). Se um dia houver um revisor:
+**Por quê:** o Bryan é o par de revisão. Ele precisa de escrita para ser um revisor que conta para a regra de
+aprovação da `main`.
 
-1. **Settings** → **Collaborators** → **Add people** → usuário da pessoa → ela aceita o convite
-   (em repositório de conta pessoal, todo colaborador recebe escrita).
-2. **Settings** → **Rules** → **Rulesets** → `proteger-main` → *Required approvals* de `0` para `1`.
+1. **Settings** → **Collaborators** (seção *Access*) → **Add people** → `BryanBellinaso` → **Add to repository**.
+2. O Bryan recebe o convite por e-mail/notificação e **aceita** em
+   <https://github.com/RicardoFissmer/leo-na-amazonia/invitations>.
+3. Depois de aceito, ele aparece na lista como colaborador. Em repositório de conta pessoal, todo colaborador tem
+   **escrita** (*Write*): pode criar branches, fazer push nelas e revisar PRs.
 
 ## 3. Proteção da `main` (Ruleset)
 
@@ -43,9 +46,11 @@ evidência do push recusado.
 6. Em **Branch rules**, marque:
    - [x] **Restrict deletions** — ninguém apaga a `main`.
    - [x] **Require a pull request before merging**
-     - **Required approvals:** `0` — o GitHub não deixa o autor aprovar o próprio PR; com `1` e sem outro
-       colaborador, nenhum PR entraria. O Pull Request continua **obrigatório**.
-     - [ ] **Require review from Code Owners** — **deixe desmarcado** (pelo mesmo motivo).
+     - **Required approvals:** `1` (a aprovação do Bryan)
+     - [x] **Dismiss stale pull request approvals when new commits are pushed** — se o código mudar depois da
+       aprovação, o Bryan precisa aprovar de novo.
+     - [ ] **Require review from Code Owners** — **deixe desmarcado** (o CODEOWNERS só tem você, e você não pode
+       aprovar o próprio PR).
    - [x] **Require status checks to pass**
      - **Add checks** → digite **`validar-godot`** e selecione.
      - [x] **Require branches to be up to date before merging** (opcional, recomendado).
