@@ -1,0 +1,63 @@
+# Integração contínua: valida cada Pull Request para a main.
+# O job "validar-godot" é o status check obrigatório da regra de proteção da main (ver docs/PLANO_GCS.md, seção 9).
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+# Só leitura: este workflow não publica nada.
+permissions:
+  contents: read
+
+# Se chegar um commit novo no mesmo PR, cancela a validação antiga.
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: 4.7.2 # mesma versão do project.godot (config/features = 4.7)
+
+jobs:
+  validar-godot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    container:
+      image: barichello/godot-ci:4.7.2
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v7
+
+      - name: Preparar os templates de exportação
+        # a imagem guarda os templates em /root; no container do Actions o HOME é outro
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable \
+             ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Importar o projeto
+        run: godot --headless --import 2>&1 | tee importacao.log
+
+      - name: Rodar a cena principal (procura erros de script)
+        run: |
+          godot --headless --quit-after 120 2>&1 | tee execucao.log
+          if grep -E "SCRIPT ERROR|Parse Error|Failed to load script|Cannot open file" importacao.log execucao.log; then
+            echo "::error::O Godot encontrou erros de script. Veja o log acima."
+            exit 1
+          fi
+
+      - name: Exportar para Web (teste)
+        run: |
+          mkdir -p build/web
+          godot --headless --export-release "Web" build/web/index.html
+          for f in index.html index.pck index.wasm index.js; do
+            test -s "build/web/$f" || { echo "::error::Faltou build/web/$f no export Web"; exit 1; }
+          done
+          ls -lh build/web
+
+      - name: Guardar o build Web do PR (para quem revisa testar)
+        uses: actions/upload-artifact@v7
+        with:
+          name: jogo-web-pr-${{ github.event.pull_request.number }}
+          path: build/web
+          retention-days: 7
