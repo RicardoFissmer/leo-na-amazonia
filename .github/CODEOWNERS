@@ -1,0 +1,4 @@
+# Dono de todos os arquivos do repositório: o GitHub pede automaticamente a revisão dele em cada PR.
+# O colega revisor NÃO está aqui de propósito: ele revisa todos os PRs pela regra de "1 aprovação" da main,
+# e a regra "Require review from Code Owners" fica desligada (ver docs/PLANO_GCS.md, seção 2).
+* @RicardoFissmer
