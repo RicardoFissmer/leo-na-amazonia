@@ -1,4 +1,4 @@
-# Dono de todos os arquivos do repositório (projeto individual).
-# A regra "Require review from Code Owners" fica desligada: o autor não pode aprovar o próprio PR
-# (ver docs/PLANO_GCS.md, seção 2).
+# Dono de todos os arquivos do repositório.
+# O revisor (@BryanBellinaso) NÃO está aqui de propósito: ele revisa todos os PRs pela regra de "1 aprovação"
+# da main, e a regra "Require review from Code Owners" fica desligada (ver docs/PLANO_GCS.md, seção 2).
 * @RicardoFissmer
