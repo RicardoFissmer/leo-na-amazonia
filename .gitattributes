@@ -1,5 +1,35 @@
-# Godot usa finais de linha LF
+# Texto: o Git normaliza para LF (padrão do Godot), não importa o sistema de quem fez o commit
 * text=auto eol=lf
+
+# Arquivos do Godot e do projeto que são texto
+*.gd text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+*.godot text eol=lf
+*.cfg text eol=lf
+*.import text eol=lf
+*.uid text eol=lf
+*.gdshader text eol=lf
+*.gdshaderinc text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+
+# Binários: sem conversão de fim de linha e sem diff de texto
 *.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.svg binary
+*.ico binary
 *.wav binary
 *.ogg binary
+*.mp3 binary
+*.mp4 binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.zip binary
+*.pck binary
+*.exe binary

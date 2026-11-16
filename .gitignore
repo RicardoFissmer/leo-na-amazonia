@@ -1,11 +1,24 @@
-# Pasta de cache do Godot (é recriada ao abrir o projeto)
+# --- Godot 4 ---
+# Cache de importação e metadados do editor (são recriados ao abrir o projeto)
 .godot/
+# Template de build do Android (gerado pelo editor se um dia exportarmos para Android)
+/android/
+# Configuração local que muda a janela (usada só para gravar o vídeo)
+override.cfg
 
-# Executáveis exportados (ficam na página de Releases do GitHub)
-build/
+# --- Builds exportados (ficam nas Releases e no GitHub Pages, não no Git) ---
+/build/
 *.exe
 *.pck
+*.zip
 
-# Arquivos do sistema
+# --- Arquivos temporários do sistema e de editores ---
 Thumbs.db
+desktop.ini
 .DS_Store
+*.tmp
+*.swp
+*~
+.vscode/
+.idea/
+__pycache__/
