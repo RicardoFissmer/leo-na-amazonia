@@ -4,7 +4,7 @@ extends CanvasLayer
 
 signal jogar
 
-const VERSAO := "v1.7.0"
+const VERSAO := "v1.8.0"
 const COR_TEXTO := Color("fff3d6")
 const COR_FOCO := Color("ffe14a")
 const COR_CONTORNO := Color("2a150a")

@@ -1,8 +1,8 @@
 # GDD — Léo na Amazônia
 
 **Documento de Design do Jogo**
-Versão do documento: 1.6 — atualizado em 12/11/2026
-Versão do jogo descrita: 1.6 (Godot 4.7.2)
+Versão do documento: 1.8 — atualizado em 26/11/2026 (entrega final)
+Versão do jogo descrita: v1.8.0 (Godot 4.7.2)
 
 ---
 
@@ -24,7 +24,8 @@ Versão do jogo descrita: 1.6 (Godot 4.7.2)
 14. [Tecnologia e arquitetura](#14-tecnologia-e-arquitetura)
 15. [Limitações conhecidas](#15-limitações-conhecidas)
 16. [Próximos passos (roadmap)](#16-próximos-passos-roadmap)
-17. [Histórico de versões](#17-histórico-de-versões)
+17. [Ajustes até a versão final (antes e depois)](#17-ajustes-até-a-versão-final-antes-e-depois)
+18. [Histórico de versões](#18-histórico-de-versões)
 
 ---
 
@@ -34,7 +35,7 @@ Versão do jogo descrita: 1.6 (Godot 4.7.2)
 |---|---|
 | **Título** | Léo na Amazônia |
 | **Gênero** | Plataforma 2D + quebra-cabeça de palavras + quiz educativo |
-| **Plataforma** | PC (Windows). O código-fonte roda em qualquer sistema com Godot 4.7 |
+| **Plataforma** | PC: executável para Windows e versão Web (navegador do computador, GitHub Pages). O código-fonte roda em qualquer sistema com Godot 4.7 |
 | **Engine** | Godot Engine 4.7.2 (GDScript) |
 | **Modo de jogo** | Um jogador |
 | **Duração de uma partida** | Cerca de 10 a 15 minutos (5 fases) |
@@ -383,7 +384,8 @@ main.gd
 - Não há salvamento, recorde, menu de pausa nem controle de volume.
 - Ao recomeçar a fase, os pontos já ganhos são mantidos e as letras podem ser coletadas de novo (falha conhecida).
 - Só teclado e mouse. Não há gamepad nem toque.
-- Executável apenas para Windows. Outros sistemas precisam abrir o projeto no Godot.
+- Executável só para Windows. Em outros sistemas, o jogo roda pela versão Web (navegador do computador) ou abrindo o projeto no Godot.
+- A versão Web não tem controles de toque, então não dá para jogar no celular.
 
 ---
 
@@ -402,7 +404,33 @@ main.gd
 
 ---
 
-## 17. Histórico de versões
+## 17. Ajustes até a versão final (antes e depois)
+
+**De onde vieram os ajustes.** Na minha turma não houve o *Dia do Analista*, então o projeto (individual) não recebeu a
+ficha técnica de outra equipe. Os ajustes vieram de duas fontes: as **recomendações das aulas** (o jogo precisa de uma
+história que dê sentido às ações, de um tutorial que ensine uma coisa de cada vez e de textos que a criança consiga
+ler a tempo) e dos **meus próprios testes**, jogando como quem nunca viu o jogo. O vídeo de apresentação mostra cada
+ajuste lado a lado (versão 1.3, de outubro, × versão final).
+
+| Problema observado na v1.3 (out/2026) | Ajuste na versão final | Origem |
+|---|---|---|
+| O jogador caía direto na fase, sem saber por que coletava letras | História do **Livro da Floresta** (3 telas antes da fase 1 e 2 telas no final), com personagem, conflito e consequência (seção 1) | Aula: narrativa |
+| Quem nunca tinha jogado não sabia andar, pular nem o que eram os perigos | **Tutorial na fase 1**: uma dica por vez, que some quando a ação é feita, com **tentativa segura** (errar não tira vida) e som de confirmação (seção 5.5) | Aula: tutorial |
+| Mensagens sumiam antes de a criança terminar de ler | Mensagens com mais tempo na tela (2,5 a 3,5 s) e telas de história, montagem e quiz que esperam o Enter (seção 5.6); dica do animal em destaque no início da fase | Aula: leitura e acessibilidade |
+| O Léo era um boneco de 12 × 16 px, com pouca expressão e pouca animação | Léo redesenhado em 16 × 24 px, rosto expressivo, 13 quadros (corrida, pulo, queda, dano, comemoração), esticar e achatar, poeira e *jump buffer* (seção 5.1) | Testes próprios |
+| Animais das telas de desafio simples, sem cenário | Animais redesenhados com cenário próprio (galho, mata, rio) e mais detalhes | Testes próprios |
+| Menu só com o título em texto e botões simples | Logo em pixel art, placas de madeira, cursor com a cabeça do Léo e cena viva no fundo (arara, onça, Léo correndo) | Testes próprios |
+| Troca seca entre telas | Efeitos leves: vinheta, cor no cenário, transição pixelada e modo retrô opcional (tecla R) | Testes próprios |
+| Só dava para jogar baixando o executável | **Versão Web** no GitHub Pages, sem instalar nada | Facilitar o teste em sala |
+| Mudanças iam direto para o repositório | Gestão de configuração: PRs com revisão, validação automática do projeto (CI) e publicação com aprovação (staging → production) — ver [PLANO_GCS.md](PLANO_GCS.md) | Disciplina de GCS |
+
+**O que continua igual (mecânica central):** coletar as letras da palavra pelo mapa, montar o nome do animal e
+responder ao Verdadeiro ou Falso. Os ajustes mexeram na forma de **aprender** a jogar e de **ler** o jogo, não no
+desafio em si.
+
+---
+
+## 18. Histórico de versões
 
 | Versão | Data | Mudanças |
 |---|---|---|
@@ -413,3 +441,6 @@ main.gd
 | 1.4 | 12/11/2026 | História do Livro da Floresta (telas de abertura e final), tutorial na fase 1 com tentativa segura, mensagens com mais tempo de leitura, capa do jogo |
 | 1.5 | 12/11/2026 | Efeitos de tela com o VesperaFX: vinheta e cor no cenário, transição pixelada entre telas e modo retrô opcional (tecla R / menu) |
 | 1.6 | 12/11/2026 | Léo redesenhado (16×24, 13 quadros, esticar/achatar, poeira, *jump buffer*), menu novo (logo, placas de madeira, cursor do Léo, cena viva) e vídeo de apresentação |
+| v1.7.0 | 16/11/2026 | Versão Web no GitHub Pages e plano de Gestão de Configuração (PRs, CI, environments, SemVer) |
+| v1.7.1 | 16/11/2026 | Par de revisão incluído no processo (CODEOWNERS, guia e README) |
+| v1.8.0 | 26/11/2026 | Entrega final: vídeo de apresentação (10 min) e trailer narrativo, executável com instruções curtas (`COMO_JOGAR.txt`), seção de ajustes neste GDD e README com os links da entrega |
