@@ -1,0 +1,31 @@
+LÉO NA AMAZÔNIA — v1.8.0
+Jogo de plataforma educativo para crianças em fase de alfabetização (6 a 10 anos).
+
+COMO ABRIR
+- Windows: descompacte o zip e dê dois cliques em LeoNaAmazonia.exe.
+  Se o Windows mostrar "O Windows protegeu o computador", clique em "Mais informações" e depois em "Executar assim mesmo"
+  (o jogo não tem assinatura digital paga, por isso o aviso aparece).
+- Navegador (sem instalar nada): https://ricardofissmer.github.io/leo-na-amazonia/
+  Use um navegador de computador (Chrome, Edge ou Firefox).
+
+OBJETIVO
+Uma ventania espalhou as letras do Livro da Floresta. Em cada fase, colete todas as letras,
+monte o nome do animal da Amazônia e responda ao desafio de Verdadeiro ou Falso.
+São 5 fases: ARARA, ONÇA, BOTO, TUCANO e CAPIVARA.
+
+CONTROLES
+  Setas ou A / D ............ andar
+  Espaço, W ou seta p/ cima . pular (segure para pular mais alto)
+  Mouse ou setas + Enter .... montar a palavra e responder ao quiz
+  Backspace ................. desfazer a última letra na montagem
+  Enter ..................... continuar
+  M ......................... liga/desliga o som
+  R ......................... liga/desliga o modo retrô
+  Esc ....................... voltar ao menu
+
+DICAS
+- A fase 1 tem um tutorial: siga a dica no alto da tela. No começo do tutorial, errar não tira vida.
+- Cuidado com a onça, a piranha (quando aparecem bolhas no rio) e a cobra.
+- Você tem 3 vidas. Se perder todas, a fase recomeça.
+
+Código-fonte, GDD e vídeos: https://github.com/RicardoFissmer/leo-na-amazonia

@@ -19,8 +19,23 @@ sobre a fauna amazônica (arara, onça-pintada, boto-cor-de-rosa, tucano e capiv
 - **Idioma:** português
 - **Documento de design (GDD):** [docs/GDD.md](docs/GDD.md)
 - **Plano de Gestão de Configuração:** [docs/PLANO_GCS.md](docs/PLANO_GCS.md)
-- **Vídeo de apresentação (90 s):** [assistir / baixar](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.6/leo-na-amazonia-video.mp4)
-  — o Léo se apresenta e mostra o jogo. Como foi feito: [video/LEIAME.md](video/LEIAME.md)
+
+## Entrega final
+
+Projeto individual de **Ricardo Fissmer Batista** — versão final **v1.8.0**.
+
+| Item | Link |
+|---|---|
+| 🎬 **Vídeo de apresentação** (10 min 45 s, narrado e legendado): proposta, história, menu, tutorial, desafios e ajustes (antes e depois) | [assistir / baixar](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.8.0/apresentacao-leo-na-amazonia.mp4) |
+| 🎞️ **Trailer narrativo** (90 s): o universo, o Léo, a vovó Lúcia e a ventania que espalha as letras | [assistir / baixar](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.6/leo-na-amazonia-video.mp4) |
+| 🌐 **Jogar no navegador** (sem instalar) | <https://ricardofissmer.github.io/leo-na-amazonia/> |
+| 💾 **Executável para Windows** (zip com `LeoNaAmazonia.exe` e as instruções curtas [`COMO_JOGAR.txt`](docs/COMO_JOGAR.txt)) | [LeoNaAmazonia-windows.zip](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.8.0/LeoNaAmazonia-windows.zip) |
+| 📄 **GDD atualizado** (mecânicas finais e ajustes) | [docs/GDD.md](docs/GDD.md) |
+| 📦 **Repositório** | <https://github.com/RicardoFissmer/leo-na-amazonia> |
+
+- **Mecânicas finais:** [seção 5 (Como jogar)](#5-como-jogar) e [seção 6 (Objetivo, regras e progressão)](#6-objetivo-regras-e-progressão).
+- **Ajustes até a versão final:** [seção 12](#12-ajustes-até-a-versão-final) (resumo) e [GDD, seção 17](docs/GDD.md#17-ajustes-até-a-versão-final-antes-e-depois) (detalhes).
+- **Como os vídeos foram feitos** (gravação automática do jogo + Remotion): [video/LEIAME.md](video/LEIAME.md).
 
 ---
 
@@ -37,6 +52,7 @@ sobre a fauna amazônica (arara, onça-pintada, boto-cor-de-rosa, tucano e capiv
 9. [Como modificar o jogo](#9-como-modificar-o-jogo)
 10. [Créditos e licenças](#10-créditos-e-licenças)
 11. [Fluxo de trabalho e gestão de configuração](#11-fluxo-de-trabalho-e-gestão-de-configuração)
+12. [Ajustes até a versão final](#12-ajustes-até-a-versão-final)
 
 ---
 
@@ -68,7 +84,10 @@ sobre a fauna amazônica (arara, onça-pintada, boto-cor-de-rosa, tucano e capiv
 
 1. Abra a página **[Releases](https://github.com/RicardoFissmer/leo-na-amazonia/releases/latest)** do repositório.
 2. Baixe o arquivo **`LeoNaAmazonia-windows.zip`**.
-3. Descompacte o arquivo em qualquer pasta.
+3. Descompacte o arquivo em qualquer pasta. Junto do jogo vem o **`COMO_JOGAR.txt`**, com as instruções curtas
+   (como abrir, objetivo e controles).
+
+Para jogar **sem baixar nada**, use a versão Web: <https://ricardofissmer.github.io/leo-na-amazonia/>.
 
 ### Opção B — Clonar o repositório com Git
 
@@ -258,7 +277,8 @@ passando pelas **5 fases**: **ARARA → ONÇA → BOTO → TUCANO → CAPIVARA**
 - **Os pontos não são descontados quando a fase recomeça.** Ao perder as 3 vidas, as letras voltam e
   podem ser coletadas de novo, somando +10 outra vez (falha conhecida).
 - **Controles só por teclado e mouse.** Não há suporte a controle (gamepad) nem a tela de toque.
-- **Executável só para Windows.** No Linux e no macOS, o jogo roda pelo Godot (código-fonte), mas não há executável pronto.
+- **Executável só para Windows.** No Linux e no macOS, o jogo roda pela versão Web ou pelo Godot (código-fonte).
+- **Versão Web só no computador.** Sem controles de toque, não dá para jogar no celular.
 - **Só em português.** Não há opção de idioma.
 - **Som:** só dá para ligar ou desligar (tecla M). Não há controle de volume.
 - O executável **não tem assinatura digital**, então o Windows pode mostrar um aviso na primeira vez.
@@ -344,6 +364,8 @@ tools/               geradores de arte em Python (Léo, retrato, menu, animais, 
   [Mozilla Public License 2.0](shaders/vesperafx/LICENSE.txt). Usamos `crt`, `pixelation`, `rendering` e `utils`
   sem modificação (detalhes em [shaders/vesperafx/LEIAME.md](shaders/vesperafx/LEIAME.md)).
 - **Engine:** [Godot Engine](https://godotengine.org) (licença MIT), com a fonte padrão do Godot.
+- **Vídeos:** montados com [Remotion](https://www.remotion.dev) (licença gratuita para indivíduos e estudantes);
+  narração da apresentação com a voz sintetizada *Microsoft Daniel* (pt-BR) do Windows. Detalhes em [video/LEIAME.md](video/LEIAME.md).
 
 ---
 
@@ -373,3 +395,23 @@ O preset **Web** fica sem threads (`variant/thread_support=false`) para rodar no
 pasta `build/web` com um servidor local (por exemplo, `python -m http.server` dentro dela) — abrir o `index.html`
 direto pelo arquivo não funciona.
 
+---
+
+## 12. Ajustes até a versão final
+
+Na minha turma não houve o *Dia do Analista*, então o projeto (individual) não recebeu a ficha técnica de outra equipe.
+Os ajustes vieram das **recomendações das aulas** e dos **meus próprios testes**. A tabela completa, com a origem de cada
+ajuste, está no [GDD, seção 17](docs/GDD.md#17-ajustes-até-a-versão-final-antes-e-depois). O vídeo de apresentação mostra
+o antes e o depois lado a lado.
+
+| Antes (v1.3, outubro) | Depois (v1.8.0) |
+|---|---|
+| O jogador caía direto na fase, sem saber por que coletava letras | História do **Livro da Floresta**: personagem (Léo e vovó Lúcia), conflito (a ventania) e consequência (cada nome volta para o livro) |
+| Ninguém explicava como jogar | **Tutorial na fase 1**: uma dica por vez, com tentativa segura (errar não tira vida) |
+| Mensagens rápidas demais para quem está aprendendo a ler | Mensagens com mais tempo na tela e telas que esperam o Enter; dica do animal em destaque |
+| Léo de 12 × 16 px com pouca animação | Léo de 16 × 24 px, rosto expressivo, 13 quadros, esticar/achatar, poeira e *jump buffer* |
+| Animais e menu simples | Animais com cenário próprio; menu com logo, placas de madeira e cena viva; efeitos leves de tela |
+| Só executável para Windows | Também **versão Web**, sem instalar nada |
+| Mudanças direto no repositório | Gestão de configuração: PR com revisão, CI e publicação com aprovação ([PLANO_GCS.md](docs/PLANO_GCS.md)) |
+
+A mecânica central não mudou: coletar as letras, montar o nome do animal e responder ao Verdadeiro ou Falso.

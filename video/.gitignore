@@ -4,3 +4,7 @@ gravacoes/
 
 audio/cache/
 public/audio/
+
+# Apresentação: falas brutas (as normalizadas ficam em public/voz) e a tomada longa, refeita pelo _gravacao.gd
+apresentacao/voz/
+public/clipes/live.mp4
