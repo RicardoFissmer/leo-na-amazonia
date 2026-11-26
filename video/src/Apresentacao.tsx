@@ -15,7 +15,7 @@ import dados from "./apresentacao.json";
 import { FONTE, Mata, Moeda, Pixel, Vinheta } from "./pecas";
 
 /**
- * Vídeo de apresentação final (gameplay comentado, ~11 min).
+ * Vídeo de apresentação final (gameplay comentado, ~10 min).
  * A linha do tempo vem de src/apresentacao.json (gerado por apresentacao/montar_timeline.py).
  * `narracao` = false gera a versão sem a voz sintetizada (para gravar a própria voz por cima).
  */
@@ -197,11 +197,9 @@ const Video: React.FC<{ s: Segmento; narracao: boolean }> = ({ s, narracao }) =>
 const Abertura: React.FC<{ s: Segmento }> = ({ s }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const a02 = FALAS.find((f) => f.id === "a02")!.ini - s.ini;
-  const a03 = FALAS.find((f) => f.id === "a03")!.ini - s.ini;
+  const nome = FALAS.find((f) => f.id === "a01")!.ini - s.ini + 30;
   const logo = spring({ frame: frame - 6, fps, config: { damping: 12, stiffness: 120 } });
-  const subir = interpolate(frame, [a02 - 10, a02 + 10], [0, -90], suave);
-  const itens = ["A proposta", "A história", "Primeira vez jogando", "Um desafio completo", "Os ajustes"];
+  const subir = interpolate(frame, [nome - 10, nome + 10], [0, -60], suave);
   return (
     <AbsoluteFill>
       <Mata pan={frame * 1.2} escuro={0.25} />
@@ -209,39 +207,19 @@ const Abertura: React.FC<{ s: Segmento }> = ({ s }) => {
         style={{
           position: "absolute",
           left: (1920 - 194 * 6) / 2,
-          top: 120 + subir,
+          top: 150 + subir,
           transform: `scale(${logo})`,
           transformOrigin: "50% 50%",
         }}
       >
         <Pixel src="img/logo.png" w={194 * 6} h={74 * 6} />
       </div>
-      <Entrar de={a02} style={{ position: "absolute", left: 0, width: 1920, top: 520, display: "flex", justifyContent: "center" }}>
+      <Entrar de={nome} style={{ position: "absolute", left: 0, width: 1920, top: 600, display: "flex", justifyContent: "center" }}>
         <Painel style={{ padding: "26px 60px", textAlign: "center" }}>
           <div style={{ fontSize: 66, fontWeight: 800, color: AMARELO, lineHeight: 1.1 }}>Ricardo Fissmer Batista</div>
           <div style={{ fontSize: 40, fontWeight: 700, marginTop: 6 }}>Engenharia de Software · projeto individual</div>
         </Painel>
       </Entrar>
-      <div style={{ position: "absolute", top: 790, left: 0, width: 1920, display: "flex", justifyContent: "center", gap: 22 }}>
-        {itens.map((t, i) => (
-          <Entrar key={t} de={a03 + 20 + i * 30}>
-            <div
-              style={{
-                fontFamily: FONTE,
-                fontWeight: 800,
-                fontSize: 34,
-                color: VERDE,
-                background: AMARELO,
-                borderRadius: 40,
-                padding: "8px 26px",
-                boxShadow: "0 6px 0 rgba(0,0,0,0.3)",
-              }}
-            >
-              {i + 1}. {t}
-            </div>
-          </Entrar>
-        ))}
-      </div>
       <Vinheta forca={0.4} />
     </AbsoluteFill>
   );
@@ -281,14 +259,40 @@ const Ajustes: React.FC<{ s: Segmento }> = ({ s }) => {
   const j02 = FALAS.find((f) => f.id === "j02")!.ini - s.ini;
   const itens = [
     { de: j02 + 10, t: "Na minha turma não houve o Dia do Analista", sub: "então não recebi ficha técnica de outra equipe" },
-    { de: j02 + 190, t: "Base dos ajustes: aula “Quem vai querer jogar?”", sub: "história, tutorial e leitura para o público" },
-    { de: j02 + 330, t: "E os meus próprios testes jogando", sub: "o que estava confuso ou difícil de ler" },
+    { de: j02 + 170, t: "Base dos ajustes: aula “Quem vai querer jogar?”", sub: "história, tutorial e leitura para o público" },
+    { de: j02 + 295, t: "E os meus próprios testes jogando", sub: "o que estava confuso ou difícil de ler" },
   ];
   return (
     <AbsoluteFill>
       <Mata pan={frame * 0.8} escuro={0.45} desfoque={3} />
       <Painel style={{ position: "absolute", left: 210, top: 150, width: 1500, padding: "40px 56px" }}>
         <div style={{ fontSize: 72, fontWeight: 800, color: AMARELO }}>De onde vieram os ajustes</div>
+        {itens.map((it) => (
+          <Entrar key={it.t} de={it.de} style={{ marginTop: 34 }}>
+            <div style={{ fontSize: 52, fontWeight: 800, lineHeight: 1.1 }}>• {it.t}</div>
+            <div style={{ fontSize: 38, fontWeight: 700, color: "#bfe8cf", marginLeft: 40 }}>{it.sub}</div>
+          </Entrar>
+        ))}
+      </Painel>
+      <Vinheta />
+    </AbsoluteFill>
+  );
+};
+
+const Limites: React.FC<{ s: Segmento }> = ({ s }) => {
+  const frame = useCurrentFrame();
+  const l01 = FALAS.find((f) => f.id === "l01")!.ini - s.ini;
+  const l02 = FALAS.find((f) => f.id === "l02")!.ini - s.ini;
+  const itens = [
+    { de: l01 + 40, t: "Testar com crianças do público-alvo", sub: "e ajustar a partir do que elas fizerem" },
+    { de: l01 + 130, t: "Narração em áudio", sub: "para quem ainda não lê sozinho" },
+    { de: l02 + 30, t: "Um mapa diferente para cada animal", sub: "com a dificuldade aumentando aos poucos" },
+  ];
+  return (
+    <AbsoluteFill>
+      <Mata pan={frame * 0.8} escuro={0.45} desfoque={3} />
+      <Painel style={{ position: "absolute", left: 210, top: 150, width: 1500, padding: "40px 56px" }}>
+        <div style={{ fontSize: 72, fontWeight: 800, color: AMARELO }}>O que ainda falta</div>
         {itens.map((it) => (
           <Entrar key={it.t} de={it.de} style={{ marginTop: 34 }}>
             <div style={{ fontSize: 52, fontWeight: 800, lineHeight: 1.1 }}>• {it.t}</div>
@@ -563,6 +567,7 @@ export const Apresentacao: React.FC<Props> = ({ narracao }) => {
             {s.tipo === "sprites" ? <Sprites s={s} /> : null}
             {s.tipo === "menus" ? <Menus s={s} /> : null}
             {s.tipo === "web" ? <Web s={s} /> : null}
+            {s.tipo === "limites" ? <Limites s={s} /> : null}
             {s.tipo === "encerramento" ? <Encerramento s={s} /> : null}
           </AbsoluteFill>
         </Sequence>

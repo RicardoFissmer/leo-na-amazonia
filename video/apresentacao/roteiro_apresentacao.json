@@ -4,344 +4,362 @@
     {
       "id": "a01",
       "bloco": "abertura",
-      "texto": "Olá! Esta é a apresentação final do jogo Léo na Amazônia.",
-      "dur": 5.63
-    },
-    {
-      "id": "a02",
-      "bloco": "abertura",
-      "texto": "Eu sou o Ricardo Fissmer Batista, do curso de Engenharia de Software. Este é um projeto individual: eu fiz o jogo sozinho, então o grupo sou só eu.",
-      "dur": 12.14
-    },
-    {
-      "id": "a03",
-      "bloco": "abertura",
-      "texto": "Neste vídeo eu vou mostrar a proposta do jogo, a história, como quem joga pela primeira vez aprende os controles, um desafio completo, e os ajustes que eu fiz até chegar nesta versão final.",
-      "dur": 14.23
+      "texto": "Olá! Eu sou o Ricardo Fissmer Batista, de Engenharia de Software, e este é o Léo na Amazônia, o jogo que eu fiz sozinho, como projeto individual.",
+      "dur": 10.38
     },
     {
       "id": "p01",
       "bloco": "proposta",
-      "texto": "Léo na Amazônia é um jogo de plataforma 2D educativo, em pixel art, feito na Godot Engine 4.",
-      "dur": 8.68
+      "texto": "É um jogo de plataforma educativo, feito na Godot, para crianças de seis a dez anos que estão aprendendo a ler e a escrever.",
+      "dur": 8.08
     },
     {
       "id": "p02",
       "bloco": "proposta",
-      "texto": "Ele foi pensado para crianças em fase de alfabetização, mais ou menos de seis a dez anos.",
-      "dur": 7.18
-    },
-    {
-      "id": "p03",
-      "bloco": "proposta",
-      "texto": "A ideia é simples: o jogador corre pela floresta, coleta letras e monta o nome de animais da Amazônia. Assim, ele treina leitura e escrita enquanto aprende curiosidades sobre a arara, a onça-pintada, o boto, o tucano e a capivara.",
-      "dur": 18.6
+      "texto": "O jogador corre pela floresta, coleta letras e monta o nome de animais da Amazônia: arara, onça, boto, tucano e capivara.",
+      "dur": 8.41
     },
     {
       "id": "m01",
       "bloco": "menu",
-      "texto": "Esta é a tela inicial. Tem o logo, o Léo correndo atrás das letras, a onça logo atrás dele, e vaga-lumes e folhas caindo na mata.",
-      "dur": 11.28
+      "texto": "Esta é a tela inicial, com o Léo correndo atrás das letras e a onça logo atrás dele.",
+      "dur": 5.85
     },
     {
       "id": "m02",
       "bloco": "menu",
-      "texto": "Dá para navegar com o mouse ou com as setas. A cabecinha do Léo mostra qual botão está selecionado.",
-      "dur": 8.32
-    },
-    {
-      "id": "m03",
-      "bloco": "menu",
-      "texto": "Aqui tem o modo retrô, que deixa a tela com cara de televisão antiga. É opcional, e eu deixo desligado, porque o texto fica mais nítido.",
-      "dur": 11.55
+      "texto": "Dá para escolher com o mouse ou com as setas. A cabecinha do Léo mostra o botão selecionado.",
+      "dur": 6.93
     },
     {
       "id": "m04",
       "bloco": "menu",
-      "texto": "Em Como jogar fica um resumo dos controles: setas ou A e D para andar, espaço para pular, Esc para voltar ao menu e M para ligar ou desligar o som.",
-      "dur": 11.43
+      "texto": "Em Como jogar tem um resumo dos controles.",
+      "dur": 2.9
     },
     {
       "id": "m05",
       "bloco": "menu",
-      "texto": "Mas quem joga pela primeira vez não precisa ler isso antes. O próprio jogo ensina durante a primeira fase. Vou clicar em Jogar.",
-      "dur": 11.1
+      "texto": "Mas ninguém precisa ler isso antes: o próprio jogo ensina tudo na primeira fase. Vamos jogar!",
+      "dur": 7.41
     },
     {
       "id": "h01",
       "bloco": "historia",
       "texto": "Antes da fase, aparece a história. O Léo é um menino que mora na Amazônia e adora o Livro da Floresta da avó dele, a vovó Lúcia. Cada página mostra um animal e o nome dele.",
-      "dur": 14.37
+      "dur": 13.1
     },
     {
       "id": "h02",
       "bloco": "historia",
       "texto": "Só que uma ventania arranca as letras do livro e espalha tudo pela mata. E os animais ficam sem nome.",
-      "dur": 8.34
+      "dur": 7.51
     },
     {
       "id": "h03",
       "bloco": "historia",
       "texto": "Então a missão do Léo, e de quem joga, é entrar na floresta, recuperar as letras e devolver o nome de cada animal. Esse é o objetivo do jogo.",
-      "dur": 11.69
+      "dur": 10.24
     },
     {
       "id": "h04",
       "bloco": "historia",
       "texto": "O texto aparece aos poucos, no ritmo de leitura de uma criança, e dá para pular a história com Esc.",
-      "dur": 7.89
+      "dur": 6.6
     },
     {
       "id": "t01",
       "bloco": "tutorial",
       "texto": "Agora começa a fase um. Repare no quadro de dica lá em cima: o tutorial mostra uma ação de cada vez. A primeira é andar com as setas.",
-      "dur": 12.14
+      "dur": 11.07
     },
     {
       "id": "t02",
       "bloco": "tutorial",
       "texto": "Assim que eu ando, a dica muda: pegar a moeda com letra. As letras formam o nome do animal da dica, que fica no alto da tela: ave colorida de bico forte.",
-      "dur": 12.77
+      "dur": 11.0
     },
     {
       "id": "t03",
       "bloco": "tutorial",
       "texto": "Peguei a letra A. Ela aparece lá em cima, e eu ganho dez pontos.",
-      "dur": 6.27
+      "dur": 5.14
     },
     {
       "id": "t04",
       "bloco": "tutorial",
       "texto": "A próxima dica ensina o pulo. Segurando o espaço, o Léo pula mais alto. Vou usar isso para subir no tronco e pegar a letra que está lá em cima.",
-      "dur": 12.43
+      "dur": 11.39
     },
     {
       "id": "t05",
       "bloco": "tutorial",
       "texto": "Pronto, mais uma letra. Repare que o Léo estica no pulo e solta uma poeirinha quando cai. São detalhes para o movimento ficar gostoso.",
-      "dur": 11.62
+      "dur": 10.44
     },
     {
       "id": "t06",
       "bloco": "tutorial",
       "texto": "Agora um buraco. A dica avisa antes, e é só pular por cima.",
-      "dur": 6.21
+      "dur": 5.11
     },
     {
       "id": "t07",
       "bloco": "tutorial",
       "texto": "Aqui aparece a onça. Ela anda de um lado para o outro no chão. Encostar nela tira uma vida, então eu pulo por cima dela.",
-      "dur": 10.64
+      "dur": 9.55
     },
     {
       "id": "t08",
       "bloco": "tutorial",
       "texto": "Também tem letras erradas pelo caminho, que não fazem parte da palavra. Pegar uma delas tira cinco pontos, então vale ler a dica e escolher bem.",
-      "dur": 11.92
+      "dur": 10.57
     },
     {
       "id": "t09",
       "bloco": "tutorial",
       "texto": "No rio mora a piranha. Quando aparecem bolhas, ela vai pular. Vou errar de propósito e cair no rio, para mostrar uma coisa.",
-      "dur": 11.22
+      "dur": 9.84
     },
     {
       "id": "t10",
       "bloco": "tutorial",
       "texto": "Na parte do tutorial, errar não tira vida. O jogo diz: tudo bem, tente de novo, e o Léo volta para logo antes do obstáculo. A criança aprende sem ser punida.",
-      "dur": 14.23
+      "dur": 12.38
     },
     {
       "id": "t11",
       "bloco": "tutorial",
       "texto": "Agora eu espero a piranha mergulhar e atravesso. E ainda pego a letra que fica em cima do rio.",
-      "dur": 7.69
+      "dur": 6.83
     },
     {
       "id": "t12",
       "bloco": "tutorial",
       "texto": "A cobra fica escondida embaixo do tronco. Ela treme antes de descer, então dá para perceber o perigo a tempo.",
-      "dur": 9.04
+      "dur": 7.9
     },
     {
       "id": "t13",
       "bloco": "tutorial",
       "texto": "Para pegar a letra mais alta, eu subo nos troncos, um de cada vez.",
-      "dur": 5.81
+      "dur": 4.48
     },
     {
       "id": "t14",
       "bloco": "tutorial",
       "texto": "Com a mensagem: agora é com você, o tutorial termina. Daqui para frente valem as regras normais, com três vidas por fase.",
-      "dur": 10.68
+      "dur": 9.04
     },
     {
       "id": "f01",
       "bloco": "fase",
       "texto": "A fase continua com mais um buraco e outra onça, agora sem as dicas.",
-      "dur": 5.98
+      "dur": 4.94
     },
     {
       "id": "f02",
       "bloco": "fase",
       "texto": "E com a última letra, a parte de plataforma termina.",
-      "dur": 4.64
+      "dur": 3.61
     },
     {
       "id": "w01",
       "bloco": "montagem",
       "texto": "Agora vem a segunda parte do desafio: montar a palavra. As letras que eu peguei aparecem embaralhadas, junto com a imagem do animal.",
-      "dur": 10.83
+      "dur": 9.43
     },
     {
       "id": "w02",
       "bloco": "montagem",
       "texto": "Vou montar errado de propósito. As letras que estão na posição certa ficam verdes e travadas, e as erradas ficam vermelhas e voltam.",
-      "dur": 10.97
+      "dur": 9.9
     },
     {
       "id": "w03",
       "bloco": "montagem",
       "texto": "Agora sim: arara! Aparece uma curiosidade sobre o animal, e o nome volta para o livro.",
-      "dur": 8.03
+      "dur": 6.75
     },
     {
       "id": "w04",
       "bloco": "montagem",
       "texto": "Montar certo na primeira tentativa vale cinquenta pontos. Cada tentativa a mais vale um pouco menos.",
-      "dur": 8.95
+      "dur": 8.1
     },
     {
       "id": "q01",
       "bloco": "quiz",
       "texto": "A terceira parte é o desafio de verdadeiro ou falso. São três afirmações sobre o animal da fase, sorteadas entre cinco.",
-      "dur": 10.24
+      "dur": 9.14
     },
     {
       "id": "q02",
       "bloco": "quiz",
       "texto": "Esta eu acertei. O jogo confirma e explica o porquê.",
-      "dur": 5.43
+      "dur": 4.6
     },
     {
       "id": "q03",
       "bloco": "quiz",
       "texto": "Nesta eu vou errar de propósito. Repare que o jogo não só marca o erro: mostra a resposta certa e uma explicação. A ideia é aprender com o erro.",
-      "dur": 12.46
+      "dur": 11.32
+    },
+    {
+      "id": "q03b",
+      "bloco": "quiz",
+      "texto": "E a terceira eu acerto.",
+      "dur": 1.67
     },
     {
       "id": "q04",
       "bloco": "quiz",
       "texto": "No fim aparece quantas eu acertei, e os pontos. Cada acerto vale vinte.",
-      "dur": 7.08
+      "dur": 6.05
     },
     {
       "id": "q05",
       "bloco": "quiz",
       "texto": "Com Enter, o jogo passa para a próxima fase, com um animal novo.",
-      "dur": 5.79
+      "dur": 4.46
     },
     {
       "id": "o01",
       "bloco": "outras",
       "texto": "São cinco fases: arara, onça, boto, tucano e capivara. Cada uma tem uma dica e uma palavra diferente.",
-      "dur": 9.84
+      "dur": 8.03
     },
     {
       "id": "o02",
       "bloco": "outras",
       "texto": "A última palavra, capivara, tem oito letras, então é a fase mais longa.",
-      "dur": 6.61
+      "dur": 5.02
+    },
+    {
+      "id": "c01",
+      "bloco": "capivara",
+      "texto": "Agora, o fim da fase da capivara. Desta vez eu monto a palavra certa logo de primeira.",
+      "dur": 6.94
+    },
+    {
+      "id": "c02",
+      "bloco": "capivara",
+      "texto": "Acertando de primeira, eu ganho os cinquenta pontos inteiros. E cada animal tem a sua curiosidade.",
+      "dur": 7.34
+    },
+    {
+      "id": "c03",
+      "bloco": "capivara",
+      "texto": "No verdadeiro ou falso, agora eu acerto as três. Cada resposta certa vem com uma explicação curta.",
+      "dur": 8.18
+    },
+    {
+      "id": "c04",
+      "bloco": "capivara",
+      "texto": "Três de três! São mais sessenta pontos, e a fase termina.",
+      "dur": 4.96
     },
     {
       "id": "o03",
       "bloco": "outras",
       "texto": "Fora do tutorial, encostar num bicho tira uma vida. O Léo é empurrado, faz cara de dor e fica piscando por um instante. Se perder as três vidas, a fase recomeça do zero, sem game over.",
-      "dur": 15.99
+      "dur": 14.11
     },
     {
       "id": "o04",
       "bloco": "outras",
       "texto": "Quando a criança completa as cinco fases, aparece o final da história: o livro está completo, e a vovó agradece, mostrando a pontuação.",
-      "dur": 10.66
+      "dur": 8.87
     },
     {
       "id": "j01",
       "bloco": "ajustes",
       "texto": "Agora eu quero mostrar o que mudou até chegar nesta versão.",
-      "dur": 4.66
+      "dur": 3.83
     },
     {
       "id": "j02",
       "bloco": "ajustes",
       "texto": "Um esclarecimento: na minha turma não houve o Dia do Analista, então eu não recebi a ficha técnica de outra equipe. Os ajustes vieram das recomendações da aula: quem vai querer jogar, e dos meus próprios testes.",
-      "dur": 16.37
+      "dur": 14.61
     },
     {
       "id": "j03",
       "bloco": "antes",
       "texto": "Esta é a versão um ponto três, de outubro. O menu tinha só o título em texto e botões simples, e o Léo era um bonequinho de doze por dezesseis pixels.",
-      "dur": 12.37
+      "dur": 11.0
     },
     {
       "id": "j04",
       "bloco": "antes",
       "texto": "E o mais importante: o jogador caía direto na fase, sem história e sem tutorial. Quem nunca tinha jogado não sabia o que fazer, nem por que estava coletando letras.",
-      "dur": 13.09
+      "dur": 11.58
     },
     {
       "id": "j05",
       "bloco": "depois",
       "texto": "A aula mostrou que o jogo precisa de uma história que dê sentido às ações, e de um tutorial que ensine uma coisa de cada vez. Por isso eu criei a história do Livro da Floresta, com personagem, conflito e consequência, e o tutorial com tentativa segura.",
-      "dur": 18.68
+      "dur": 16.96
     },
     {
       "id": "j06",
       "bloco": "depois",
       "texto": "Outra recomendação foi a leitura. As mensagens agora ficam mais tempo na tela, e o começo da fase mostra a dica do animal em destaque.",
-      "dur": 11.21
+      "dur": 10.19
     },
     {
       "id": "j07",
       "bloco": "sprites",
       "texto": "Eu também redesenhei o Léo. Agora ele tem dezesseis por vinte e quatro pixels, rosto expressivo e treze quadros de animação, com corrida, pulo, queda, dano e comemoração.",
-      "dur": 14.29
+      "dur": 12.26
     },
     {
       "id": "j08",
       "bloco": "sprites",
       "texto": "Os animais das telas de desafio também foram redesenhados, com cenário e mais detalhes.",
-      "dur": 6.95
+      "dur": 5.87
     },
     {
       "id": "j09",
       "bloco": "menus",
       "texto": "O menu ganhou um logo em pixel art, placas de madeira e uma cena viva. E entraram efeitos visuais leves, como a vinheta e as transições entre as telas.",
-      "dur": 12.42
+      "dur": 11.06
     },
     {
       "id": "j10",
       "bloco": "menus",
       "texto": "Por fim, o jogo agora tem uma versão para navegador. Dá para jogar direto pelo link, sem instalar nada.",
-      "dur": 9.27
+      "dur": 7.9
+    },
+    {
+      "id": "l01",
+      "bloco": "limites",
+      "texto": "O que ainda falta: testar o jogo com crianças do público-alvo e colocar narração em áudio, para ajudar quem ainda não lê sozinho.",
+      "dur": 8.36
+    },
+    {
+      "id": "l02",
+      "bloco": "limites",
+      "texto": "Também quero criar um mapa diferente para cada animal, com a dificuldade aumentando aos poucos.",
+      "dur": 6.24
     },
     {
       "id": "e01",
       "bloco": "encerramento",
       "texto": "O código, o documento de design e as instruções estão no GitHub. E cada mudança passa por revisão e por uma validação automática antes de ser publicada.",
-      "dur": 12.35
+      "dur": 11.31
     },
     {
       "id": "e02",
       "bloco": "encerramento",
       "texto": "Para jogar, é só acessar o endereço que está na tela, ou baixar a versão para Windows na página de releases do repositório.",
-      "dur": 9.27
+      "dur": 7.88
     },
     {
       "id": "e03",
       "bloco": "encerramento",
       "texto": "Obrigado por assistir! E vem comigo ajudar o Léo a salvar o Livro da Floresta!",
-      "dur": 6.96
+      "dur": 6.14
     }
   ]
 }

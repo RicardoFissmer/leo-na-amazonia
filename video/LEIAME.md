@@ -4,25 +4,28 @@ Esta pasta gera os dois vídeos da entrega final, no mesmo projeto Remotion (`sr
 
 | Composição | Vídeo | Duração |
 |---|---|---|
-| `Apresentacao` | Apresentação do jogo, narrada e legendada (gravação do jogo + cartões) | 10 min 45 s |
-| `ApresentacaoSemNarracao` | A mesma, sem voz e sem legendas (para gravar a própria voz por cima) | 10 min 45 s |
+| `Apresentacao` | Apresentação do jogo, narrada e legendada (gravação do jogo + cartões) | 10 min 10 s |
+| `ApresentacaoSemNarracao` | A mesma, sem voz e sem legendas (para gravar a própria voz por cima) | 10 min 10 s |
 | `LeoTrailer` | Trailer narrativo com balões de fala do Léo | 90 s |
 
 ## Apresentação (10 min)
 
-1. **Roteiro:** `apresentacao/roteiro_apresentacao.json` (57 falas, cada uma com o bloco e a duração).
-2. **Voz:** `apresentacao/falar.ps1` gera cada fala com a voz *Microsoft Daniel* (pt-BR) do Windows
-   (`-Velocidade 1.06`); os arquivos normalizados ficam em `public/voz/<id>.wav`.
+1. **Roteiro:** `apresentacao/roteiro_apresentacao.json` (60 falas, cada uma com o bloco e a duração).
+2. **Voz:** `py apresentacao/gerar_vozes.py` gera todas as falas com a voz *Microsoft Daniel* (pt-BR) do Windows
+   (`falar.ps1`, velocidade 1,06, com o mínimo de pausa na pontuação para a fala ficar mais corrida), normaliza o
+   volume em `public/voz/<id>.wav` e grava a duração de cada fala no roteiro. Para refazer só algumas:
+   `py apresentacao/gerar_vozes.py c03 c04`.
 3. **Gravar o jogo:** o `_gravacao.gd` (na raiz do jogo) joga sozinho no ritmo das falas e anota em `marcas.json` o
    quadro em que cada fala começa. Cenas usadas: `live` (menu → história → tutorial → fase 1 → montagem → quiz, em uma
    tomada só), `live_fim` (o final da montagem e do quiz, recriando o mesmo estado), `outras` (fases 2 e 4, vidas e
-   final). A versão 1.3 (cena `antes`) foi gravada a partir da tag `v1.3`. Comando (1080p com `override.cfg`, ver abaixo):
+   final), `capivara` (montagem e quiz da última fase, acertando tudo). A versão 1.3 (cena `antes`) foi gravada a partir da tag `v1.3`. Comando (1080p com `override.cfg`, ver abaixo):
    ```bash
    Godot_v4.7.2-stable_win64_console.exe --path . --fixed-fps 30 --write-movie video/gravacoes/live/f.png res://_gravacao.tscn -- --cena=live
    ```
    Depois, converter os quadros para `public/clipes/<cena>.mp4` como no passo 2 do trailer. O `live.mp4` (58 MB) não
    vai para o Git; é refeito por esse comando.
-4. **Linha do tempo:** `py apresentacao/montar_timeline.py` junta roteiro + marcas e gera `src/apresentacao.json` e
+4. **Linha do tempo:** `py apresentacao/montar_timeline.py` junta roteiro + marcas, corta do menu os trechos sem
+   fala (para o começo ir direto ao ponto) e gera `src/apresentacao.json` e
    `apresentacao/roteiro_com_tempos.txt` (o roteiro com o minuto de cada fala).
 5. **Renderizar:**
    ```bash

@@ -1,4 +1,4 @@
-# Gera um WAV com a voz neural "Microsoft Daniel" (pt-BR) do Windows.
+﻿# Gera um WAV com a voz neural "Microsoft Daniel" (pt-BR) do Windows.
 # Uso: powershell -ExecutionPolicy Bypass -File falar.ps1 -Texto "Olá" -Saida "saida.wav" [-Velocidade 0.97]
 param(
     [Parameter(Mandatory = $true)][string]$Texto,
@@ -24,6 +24,9 @@ $sintese = New-Object Windows.Media.SpeechSynthesis.SpeechSynthesizer
 $sintese.Voice = [Windows.Media.SpeechSynthesis.SpeechSynthesizer]::AllVoices |
     Where-Object { $_.DisplayName -like '*Daniel*' } | Select-Object -First 1
 $sintese.Options.SpeakingRate = $Velocidade
+# Menos silêncio nas vírgulas, nos pontos e no fim da fala: a narração fica mais corrida e menos robótica.
+$sintese.Options.PunctuationSilence = [Windows.Media.SpeechSynthesis.SpeechPunctuationSilence]::Min
+$sintese.Options.AppendedSilence = [Windows.Media.SpeechSynthesis.SpeechAppendedSilence]::Min
 
 $fluxo = Esperar ($sintese.SynthesizeTextToStreamAsync($Texto)) ([Windows.Media.SpeechSynthesis.SpeechSynthesisStream])
 $tamanho = [uint32]$fluxo.Size

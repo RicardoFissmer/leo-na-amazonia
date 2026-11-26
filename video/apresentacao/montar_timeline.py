@@ -52,57 +52,99 @@ def capitulo(texto: str, ini: int, sub: str = ""):
     capitulos.append({"texto": texto, "sub": sub, "ini": ini})
 
 
-# 1. abertura: quem sou, qual é o jogo
-fim = em_sequencia(["a01", "a02", "a03"], t + 24)
-segmento("abertura", t, fim + 30 - t)
-t = fim + 30
+# 1. abertura: quem sou e qual é o jogo (uma fala só, direto ao ponto)
+fim = em_sequencia(["a01"], t + 18)
+segmento("abertura", t, fim + 24 - t)
+t = fim + 24
 
 # 2. gravação contínua: menu -> história -> tutorial -> fase -> montagem -> quiz
-ids_proposta = ["p01", "p02", "p03"]
+ids_proposta = ["p01", "p02"]
 dur_proposta = sum(q(falas[i]["dur"]) for i in ids_proposta) + VAO * (len(ids_proposta) - 1)
-l0 = max(0, live["m01"] - (24 + dur_proposta + 24))
+l0 = max(0, live["m01"] - (18 + dur_proposta + 18))
 # A gravação contínua parou no meio da montagem; o final (a partir da fala w02) foi gravado à parte
 # (cena live_fim, que recria o mesmo estado). As duas partes se emendam com uma fusão de 8 quadros.
 fim_mc = json.loads((base / "gravacoes/live_fim/marcas.json").read_text(encoding="utf-8"))
 CORTE, FUSAO = live["w02"], 8
 d0 = fim_mc["w02"]
-dur_parte1 = CORTE - l0
 for k in ["w02", "w03", "w04", "q01", "q02", "q03", "q04", "q05", "fim"]:
     live[k] = CORTE + fim_mc[k] - d0  # marcas da parte final no relógio da gravação principal
-dur_live = live["fim"] - l0
-segmento("video", t, dur_parte1 + FUSAO, src="clipes/live.mp4", de=l0, som=True)
-segmento("video", t + dur_parte1, dur_live - dur_parte1, src="clipes/live_fim.mp4", de=d0, som=True, fusao=FUSAO)
+# Trechos do menu que saem do vídeo, para ir mais direto ao ponto (no relógio da gravação principal):
+# o silêncio depois de m01, o modo retrô inteiro (m03), parte da tela Como jogar e o silêncio depois de m05.
+def fim_fala_live(fid, folga):
+    return live[fid] + ATRASO + q(falas[fid]["dur"]) + folga
+cortes = [
+    (fim_fala_live("m01", 15), live["m02"] - 3),
+    (live["m03"] - 10, live["m04"] + 20),
+    (live["m04"] + 20 + q(falas["m04"]["dur"]) + 100, live["m05"] - 3),
+    (fim_fala_live("m05", 12), live["jogar"] - 3),
+]
+# pedaços que ficam: (início, fim, arquivo, início no arquivo)
+pedacos, ini_p = [], l0
+for c0, c1 in cortes:
+    pedacos.append((ini_p, c0, "clipes/live.mp4", ini_p))
+    ini_p = c1
+pedacos.append((ini_p, CORTE, "clipes/live.mp4", ini_p))
+pedacos.append((CORTE, live["fim"], "clipes/live_fim.mp4", d0))
+
+
+def no_video(m: int) -> int:
+    """Quadro do vídeo final para um quadro da gravação principal (marcas dentro de um corte vão para o fim dele)."""
+    acc = t
+    for p0, p1, _, _ in pedacos:
+        if m < p1:
+            return acc + max(0, m - p0)
+        acc += p1 - p0
+    return acc
+
+
+acc = t
+for i, (p0, p1, src, de) in enumerate(pedacos):
+    ult = i == len(pedacos) - 1
+    extra = {"fusao": FUSAO} if i > 0 else {}
+    segmento("video", acc, p1 - p0 + (0 if ult else FUSAO), src=src, de=de, som=True, **extra)
+    acc += p1 - p0
+dur_live = acc - t
 capitulo("A proposta", t + 10, "jogo de plataforma educativo")
-ini_prop = t + 24
-fim_p = ini_prop
-cartoes = []
-for fid in ids_proposta:
-    cartoes.append({"ini": fim_p})
-    fim_p = fala(fid, fim_p) + VAO
-segmento("proposta", ini_prop - 10, fim_p - ini_prop + 20, cartoes=[c["ini"] - (ini_prop - 10) for c in cartoes])
+ini_prop = t + 18
+cartoes = [ini_prop]
+fim_p = fala("p01", ini_prop) + VAO
+cartoes += [ini_prop + 90, fim_p]
+fim_p = fala("p02", fim_p) + VAO
+segmento("proposta", ini_prop - 10, fim_p - ini_prop + 20, cartoes=[c - (ini_prop - 10) for c in cartoes])
 nomes = {"m01": ("A tela inicial", "menu"), "h01": ("A história", "o objetivo do jogo"),
          "t01": ("Primeira vez jogando", "o tutorial ensina uma ação de cada vez"),
          "f01": ("O resto da fase", "agora sem dicas"),
          "w01": ("Desafio 1", "montar a palavra"), "q01": ("Desafio 2", "verdadeiro ou falso")}
 for fid in sorted((k for k in live if k in falas), key=lambda k: live[k]):
-    ini = t + live[fid] - l0 + ATRASO
+    ini = no_video(live[fid]) + ATRASO
     fala(fid, ini)
     if fid in nomes:
         capitulo(nomes[fid][0], ini - ATRASO, nomes[fid][1])
+# fala sem marca própria: cai na terceira resposta do quiz (o _gravacao.gd responde 16 s depois da marca q03)
+fala("q03b", no_video(live["q03"]) + q(15.4))
 t += dur_live
 
-# 3. outras fases, vidas e final
+# 3. outras fases, a fase da capivara completa, vidas e final
+cap = json.loads((base / "gravacoes/capivara/marcas.json").read_text(encoding="utf-8"))
 o0 = outras["o01"] - 15
-dur_o = outras["fim"] - o0
-segmento("video", t, dur_o, src="clipes/outras.mp4", de=o0, som=True)
-for fid, nome in [("o01", ("As outras fases", "onça, boto, tucano e capivara")),
-                  ("o02", None), ("o03", ("Vidas", "fora do tutorial, errar custa")),
-                  ("o04", ("O final", "o livro está completo"))]:
-    ini = t + outras[fid] - o0 + ATRASO
-    fala(fid, ini)
-    if nome:
-        capitulo(nome[0], ini - ATRASO, nome[1])
-t += dur_o
+o_meio = outras["o03"] - 19  # antes de a gravação trocar para a fase da onça
+c0 = cap["c01"] - 30
+trechos = [("clipes/outras.mp4", o0, o_meio, outras, ["o01", "o02"]),
+           ("clipes/capivara.mp4", c0, cap["fim"], cap, ["c01", "c02", "c03", "c04"]),
+           ("clipes/outras.mp4", o_meio, outras["fim"], outras, ["o03", "o04"])]
+titulos = {"o01": ("As outras fases", "onça, boto, tucano e capivara"),
+           "o03": ("Vidas", "fora do tutorial, errar custa"),
+           "o04": ("O final", "o livro está completo")}
+for i, (src, a0, a1, marcas, ids) in enumerate(trechos):
+    ult = i == len(trechos) - 1
+    extra = {"fusao": FUSAO} if i > 0 else {}
+    segmento("video", t, a1 - a0 + (0 if ult else FUSAO), src=src, de=a0, som=True, **extra)
+    for fid in ids:
+        ini = t + marcas[fid] - a0 + ATRASO
+        fala(fid, ini)
+        if fid in titulos:
+            capitulo(titulos[fid][0], ini - ATRASO, titulos[fid][1])
+    t += a1 - a0
 
 # 4. ajustes: de onde vieram
 fim = em_sequencia(["j01", "j02"], t + 24)
@@ -141,7 +183,13 @@ fim = fala("j10", t + 12) + 24
 segmento("web", t, fim - t)
 t = fim
 
-# 9. encerramento
+# 9. o que ainda falta
+fim = em_sequencia(["l01", "l02"], t + 15)
+segmento("limites", t, fim + 20 - t)
+capitulo("O que ainda falta", t + 6, "próximos passos")
+t = fim + 20
+
+# 10. encerramento
 fim = em_sequencia(["e01", "e02", "e03"], t + 20)
 segmento("encerramento", t, fim + 75 - t)
 capitulo("Links", t + 6, "repositório, jogo no navegador e Windows")
