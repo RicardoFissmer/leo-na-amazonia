@@ -809,3 +809,47 @@ func live_fim() -> void:
 	print("    coletadas=%s pontos=%d" % [str(main.coletadas), main.pontos])
 	await _esperar(4.0)
 	await _desafios()
+
+
+## Fim da fase da capivara: monta a palavra certa de primeira e acerta as três do verdadeiro ou falso.
+func capivara() -> void:
+	_carregar_duracoes()
+	await _fase(4)
+	main.pontos = 520
+	main.jogador.global_position = Vector2(50.5 * 16, 132)
+	await _esperar(0.3)
+	main.jogador.global_position = Vector2(56.88 * 16, 132)
+	await _esperar(1.2)
+	var letras: Array = []
+	for n in main.mundo.get_children():
+		if n.get_script() == main.Letra and main.faltando.has(n.letra):
+			letras.append(n)
+	for n in letras:
+		if is_instance_valid(n) and main.faltando.has(n.letra) and not main.montando:
+			main._ao_coletar(n.letra, n)
+			await get_tree().process_frame
+	await _esperar(1.0)
+	_marca("c01")
+	await _esperar(2.5)
+	for c in main.letras.duplicate():
+		await _colocar_letra(c)
+		await _esperar(0.45)
+	await _esperar(1.0)
+	await _fim_fala()
+	_marca("c02")
+	await _esperar(6.0)
+	await _fim_fala(0.2)
+	_marca("c03")
+	main._abrir_desafio()
+	await _esperar(2.2)
+	var vf = main.vf
+	for i in 3:
+		vf._responder(vf.perguntas[i][1])
+		await _esperar(2.2)
+		vf._proxima()
+		await _esperar(1.2)
+	await _fim_fala(0.3)
+	_marca("c04")
+	await _esperar(1.0)
+	await _fim_fala(0.8)
+	_marca("fim")

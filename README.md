@@ -26,7 +26,7 @@ Projeto individual de **Ricardo Fissmer Batista** — versão final **v1.8.0**.
 
 | Item | Link |
 |---|---|
-| 🎬 **Vídeo de apresentação** (10 min 45 s, narrado e legendado): proposta, história, menu, tutorial, desafios e ajustes (antes e depois) | [assistir / baixar](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.8.0/apresentacao-leo-na-amazonia.mp4) |
+| 🎬 **Vídeo de apresentação** (10 min 10 s, narrado e legendado): proposta, história, menu, tutorial, desafios e ajustes (antes e depois) | [assistir / baixar](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.8.0/apresentacao-leo-na-amazonia.mp4) |
 | 🎞️ **Trailer narrativo** (90 s): o universo, o Léo, a vovó Lúcia e a ventania que espalha as letras | [assistir / baixar](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.6/leo-na-amazonia-video.mp4) |
 | 🌐 **Jogar no navegador** (sem instalar) | <https://ricardofissmer.github.io/leo-na-amazonia/> |
 | 💾 **Executável para Windows** (zip com `LeoNaAmazonia.exe` e as instruções curtas [`COMO_JOGAR.txt`](docs/COMO_JOGAR.txt)) | [LeoNaAmazonia-windows.zip](https://github.com/RicardoFissmer/leo-na-amazonia/releases/download/v1.8.0/LeoNaAmazonia-windows.zip) |

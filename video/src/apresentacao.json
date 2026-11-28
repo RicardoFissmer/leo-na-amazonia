@@ -1,23 +1,59 @@
 {
  "fps": 30,
- "total": 19364,
+ "total": 18301,
  "segmentos": [
   {
    "tipo": "abertura",
    "ini": 0,
-   "dur": 1038
+   "dur": 353
   },
   {
    "tipo": "video",
-   "ini": 1038,
-   "dur": 9551,
+   "ini": 353,
+   "dur": 747,
    "src": "clipes/live.mp4",
-   "de": 95,
+   "de": 658,
    "som": true
   },
   {
    "tipo": "video",
-   "ini": 10581,
+   "ini": 1092,
+   "dur": 262,
+   "src": "clipes/live.mp4",
+   "de": 1547,
+   "som": true,
+   "fusao": 8
+  },
+  {
+   "tipo": "video",
+   "ini": 1346,
+   "dur": 195,
+   "src": "clipes/live.mp4",
+   "de": 2201,
+   "som": true,
+   "fusao": 8
+  },
+  {
+   "tipo": "video",
+   "ini": 1533,
+   "dur": 251,
+   "src": "clipes/live.mp4",
+   "de": 2536,
+   "som": true,
+   "fusao": 8
+  },
+  {
+   "tipo": "video",
+   "ini": 1776,
+   "dur": 6765,
+   "src": "clipes/live.mp4",
+   "de": 2881,
+   "som": true,
+   "fusao": 8
+  },
+  {
+   "tipo": "video",
+   "ini": 8533,
    "dur": 2579,
    "src": "clipes/live_fim.mp4",
    "de": 141,
@@ -26,31 +62,49 @@
   },
   {
    "tipo": "proposta",
-   "ini": 1052,
-   "dur": 1089,
+   "ini": 361,
+   "dur": 538,
    "cartoes": [
     10,
-    282,
-    509
+    100,
+    264
    ]
   },
   {
    "tipo": "video",
-   "ini": 13160,
-   "dur": 1381,
+   "ini": 11112,
+   "dur": 539,
    "src": "clipes/outras.mp4",
    "de": 7,
    "som": true
   },
   {
-   "tipo": "ajustes",
-   "ini": 14541,
-   "dur": 691
+   "tipo": "video",
+   "ini": 11643,
+   "dur": 1027,
+   "src": "clipes/capivara.mp4",
+   "de": 59,
+   "som": true,
+   "fusao": 8
   },
   {
    "tipo": "video",
-   "ini": 15232,
-   "dur": 806,
+   "ini": 12662,
+   "dur": 850,
+   "src": "clipes/outras.mp4",
+   "de": 538,
+   "som": true,
+   "fusao": 8
+  },
+  {
+   "tipo": "ajustes",
+   "ini": 13512,
+   "dur": 613
+  },
+  {
+   "tipo": "video",
+   "ini": 14125,
+   "dur": 719,
    "src": "clipes/antes.mp4",
    "de": 0,
    "som": true,
@@ -58,8 +112,8 @@
   },
   {
    "tipo": "video",
-   "ini": 16038,
-   "dur": 584,
+   "ini": 14844,
+   "dur": 533,
    "src": "clipes/live.mp4",
    "de": 2901,
    "som": false,
@@ -67,8 +121,8 @@
   },
   {
    "tipo": "video",
-   "ini": 16622,
-   "dur": 360,
+   "ini": 15377,
+   "dur": 330,
    "src": "clipes/live.mp4",
    "de": 4271,
    "som": false,
@@ -76,369 +130,392 @@
   },
   {
    "tipo": "sprites",
-   "ini": 16982,
-   "dur": 684,
-   "troca": 456
+   "ini": 15707,
+   "dur": 591,
+   "troca": 395
   },
   {
    "tipo": "menus",
-   "ini": 17666,
-   "dur": 408,
+   "ini": 16298,
+   "dur": 367,
    "antes_de": 0,
    "depois_de": 60
   },
   {
    "tipo": "web",
-   "ini": 18074,
-   "dur": 314
+   "ini": 16665,
+   "dur": 273
+  },
+  {
+   "tipo": "limites",
+   "ini": 16938,
+   "dur": 485
   },
   {
    "tipo": "encerramento",
-   "ini": 18388,
-   "dur": 976
+   "ini": 17423,
+   "dur": 878
   }
  ],
  "falas": [
   {
    "id": "a01",
-   "ini": 24,
-   "dur": 169,
-   "texto": "Olá! Esta é a apresentação final do jogo Léo na Amazônia."
-  },
-  {
-   "id": "a02",
-   "ini": 205,
-   "dur": 364,
-   "texto": "Eu sou o Ricardo Fissmer Batista, do curso de Engenharia de Software. Este é um projeto individual: eu fiz o jogo sozinho, então o grupo sou só eu."
-  },
-  {
-   "id": "a03",
-   "ini": 581,
-   "dur": 427,
-   "texto": "Neste vídeo eu vou mostrar a proposta do jogo, a história, como quem joga pela primeira vez aprende os controles, um desafio completo, e os ajustes que eu fiz até chegar nesta versão final."
+   "ini": 18,
+   "dur": 311,
+   "texto": "Olá! Eu sou o Ricardo Fissmer Batista, de Engenharia de Software, e este é o Léo na Amazônia, o jogo que eu fiz sozinho, como projeto individual."
   },
   {
    "id": "p01",
-   "ini": 1062,
-   "dur": 260,
-   "texto": "Léo na Amazônia é um jogo de plataforma 2D educativo, em pixel art, feito na Godot Engine 4."
+   "ini": 371,
+   "dur": 242,
+   "texto": "É um jogo de plataforma educativo, feito na Godot, para crianças de seis a dez anos que estão aprendendo a ler e a escrever."
   },
   {
    "id": "p02",
-   "ini": 1334,
-   "dur": 215,
-   "texto": "Ele foi pensado para crianças em fase de alfabetização, mais ou menos de seis a dez anos."
-  },
-  {
-   "id": "p03",
-   "ini": 1561,
-   "dur": 558,
-   "texto": "A ideia é simples: o jogador corre pela floresta, coleta letras e monta o nome de animais da Amazônia. Assim, ele treina leitura e escrita enquanto aprende curiosidades sobre a arara, a onça-pintada, o boto, o tucano e a capivara."
+   "ini": 625,
+   "dur": 252,
+   "texto": "O jogador corre pela floresta, coleta letras e monta o nome de animais da Amazônia: arara, onça, boto, tucano e capivara."
   },
   {
    "id": "m01",
-   "ini": 2149,
-   "dur": 338,
-   "texto": "Esta é a tela inicial. Tem o logo, o Léo correndo atrás das letras, a onça logo atrás dele, e vaga-lumes e folhas caindo na mata."
+   "ini": 901,
+   "dur": 176,
+   "texto": "Esta é a tela inicial, com o Léo correndo atrás das letras e a onça logo atrás dele."
   },
   {
    "id": "m02",
-   "ini": 2499,
-   "dur": 250,
-   "texto": "Dá para navegar com o mouse ou com as setas. A cabecinha do Léo mostra qual botão está selecionado."
-  },
-  {
-   "id": "m03",
-   "ini": 2760,
-   "dur": 346,
-   "texto": "Aqui tem o modo retrô, que deixa a tela com cara de televisão antiga. É opcional, e eu deixo desligado, porque o texto fica mais nítido."
+   "ini": 1101,
+   "dur": 208,
+   "texto": "Dá para escolher com o mouse ou com as setas. A cabecinha do Léo mostra o botão selecionado."
   },
   {
    "id": "m04",
-   "ini": 3130,
-   "dur": 343,
-   "texto": "Em Como jogar fica um resumo dos controles: setas ou A e D para andar, espaço para pular, Esc para voltar ao menu e M para ligar ou desligar o som."
+   "ini": 1352,
+   "dur": 87,
+   "texto": "Em Como jogar tem um resumo dos controles."
   },
   {
    "id": "m05",
-   "ini": 3488,
-   "dur": 333,
-   "texto": "Mas quem joga pela primeira vez não precisa ler isso antes. O próprio jogo ensina durante a primeira fase. Vou clicar em Jogar."
+   "ini": 1542,
+   "dur": 222,
+   "texto": "Mas ninguém precisa ler isso antes: o próprio jogo ensina tudo na primeira fase. Vamos jogar!"
   },
   {
    "id": "h01",
-   "ini": 3856,
-   "dur": 431,
+   "ini": 1808,
+   "dur": 393,
    "texto": "Antes da fase, aparece a história. O Léo é um menino que mora na Amazônia e adora o Livro da Floresta da avó dele, a vovó Lúcia. Cada página mostra um animal e o nome dele."
   },
   {
    "id": "h02",
-   "ini": 4322,
-   "dur": 250,
+   "ini": 2274,
+   "dur": 225,
    "texto": "Só que uma ventania arranca as letras do livro e espalha tudo pela mata. E os animais ficam sem nome."
   },
   {
    "id": "h03",
-   "ini": 4608,
-   "dur": 351,
+   "ini": 2560,
+   "dur": 307,
    "texto": "Então a missão do Léo, e de quem joga, é entrar na floresta, recuperar as letras e devolver o nome de cada animal. Esse é o objetivo do jogo."
   },
   {
    "id": "h04",
-   "ini": 4984,
-   "dur": 237,
+   "ini": 2936,
+   "dur": 198,
    "texto": "O texto aparece aos poucos, no ritmo de leitura de uma criança, e dá para pular a história com Esc."
   },
   {
    "id": "t01",
-   "ini": 5250,
-   "dur": 364,
+   "ini": 3202,
+   "dur": 332,
    "texto": "Agora começa a fase um. Repare no quadro de dica lá em cima: o tutorial mostra uma ação de cada vez. A primeira é andar com as setas."
   },
   {
    "id": "t02",
-   "ini": 5650,
-   "dur": 383,
+   "ini": 3602,
+   "dur": 330,
    "texto": "Assim que eu ando, a dica muda: pegar a moeda com letra. As letras formam o nome do animal da dica, que fica no alto da tela: ave colorida de bico forte."
   },
   {
    "id": "t03",
-   "ini": 6071,
-   "dur": 188,
+   "ini": 4023,
+   "dur": 154,
    "texto": "Peguei a letra A. Ela aparece lá em cima, e eu ganho dez pontos."
   },
   {
    "id": "t04",
-   "ini": 6281,
-   "dur": 373,
+   "ini": 4233,
+   "dur": 342,
    "texto": "A próxima dica ensina o pulo. Segurando o espaço, o Léo pula mais alto. Vou usar isso para subir no tronco e pegar a letra que está lá em cima."
   },
   {
    "id": "t05",
-   "ini": 6665,
-   "dur": 349,
+   "ini": 4617,
+   "dur": 313,
    "texto": "Pronto, mais uma letra. Repare que o Léo estica no pulo e solta uma poeirinha quando cai. São detalhes para o movimento ficar gostoso."
   },
   {
    "id": "t06",
-   "ini": 7030,
-   "dur": 186,
+   "ini": 4982,
+   "dur": 153,
    "texto": "Agora um buraco. A dica avisa antes, e é só pular por cima."
   },
   {
    "id": "t07",
-   "ini": 7363,
-   "dur": 319,
+   "ini": 5315,
+   "dur": 286,
    "texto": "Aqui aparece a onça. Ela anda de um lado para o outro no chão. Encostar nela tira uma vida, então eu pulo por cima dela."
   },
   {
    "id": "t08",
-   "ini": 7694,
-   "dur": 358,
+   "ini": 5646,
+   "dur": 317,
    "texto": "Também tem letras erradas pelo caminho, que não fazem parte da palavra. Pegar uma delas tira cinco pontos, então vale ler a dica e escolher bem."
   },
   {
    "id": "t09",
-   "ini": 8063,
-   "dur": 337,
+   "ini": 6015,
+   "dur": 295,
    "texto": "No rio mora a piranha. Quando aparecem bolhas, ela vai pular. Vou errar de propósito e cair no rio, para mostrar uma coisa."
   },
   {
    "id": "t10",
-   "ini": 8411,
-   "dur": 427,
+   "ini": 6363,
+   "dur": 371,
    "texto": "Na parte do tutorial, errar não tira vida. O jogo diz: tudo bem, tente de novo, e o Léo volta para logo antes do obstáculo. A criança aprende sem ser punida."
   },
   {
    "id": "t11",
-   "ini": 8849,
-   "dur": 231,
+   "ini": 6801,
+   "dur": 205,
    "texto": "Agora eu espero a piranha mergulhar e atravesso. E ainda pego a letra que fica em cima do rio."
   },
   {
    "id": "t12",
-   "ini": 9091,
-   "dur": 271,
+   "ini": 7043,
+   "dur": 237,
    "texto": "A cobra fica escondida embaixo do tronco. Ela treme antes de descer, então dá para perceber o perigo a tempo."
   },
   {
    "id": "t13",
-   "ini": 9391,
-   "dur": 174,
+   "ini": 7343,
+   "dur": 134,
    "texto": "Para pegar a letra mais alta, eu subo nos troncos, um de cada vez."
   },
   {
    "id": "t14",
-   "ini": 9577,
-   "dur": 320,
+   "ini": 7529,
+   "dur": 271,
    "texto": "Com a mensagem: agora é com você, o tutorial termina. Daqui para frente valem as regras normais, com três vidas por fase."
   },
   {
    "id": "f01",
-   "ini": 9909,
-   "dur": 179,
+   "ini": 7861,
+   "dur": 148,
    "texto": "A fase continua com mais um buraco e outra onça, agora sem as dicas."
   },
   {
    "id": "f02",
-   "ini": 10100,
-   "dur": 139,
+   "ini": 8052,
+   "dur": 108,
    "texto": "E com a última letra, a parte de plataforma termina."
   },
   {
    "id": "w01",
-   "ini": 10251,
-   "dur": 325,
+   "ini": 8203,
+   "dur": 283,
    "texto": "Agora vem a segunda parte do desafio: montar a palavra. As letras que eu peguei aparecem embaralhadas, junto com a imagem do animal."
   },
   {
    "id": "w02",
-   "ini": 10587,
-   "dur": 329,
+   "ini": 8539,
+   "dur": 297,
    "texto": "Vou montar errado de propósito. As letras que estão na posição certa ficam verdes e travadas, e as erradas ficam vermelhas e voltam."
   },
   {
    "id": "w03",
-   "ini": 10954,
-   "dur": 241,
+   "ini": 8906,
+   "dur": 202,
    "texto": "Agora sim: arara! Aparece uma curiosidade sobre o animal, e o nome volta para o livro."
   },
   {
    "id": "w04",
-   "ini": 11218,
-   "dur": 268,
+   "ini": 9170,
+   "dur": 243,
    "texto": "Montar certo na primeira tentativa vale cinquenta pontos. Cada tentativa a mais vale um pouco menos."
   },
   {
    "id": "q01",
-   "ini": 11504,
-   "dur": 307,
+   "ini": 9456,
+   "dur": 274,
    "texto": "A terceira parte é o desafio de verdadeiro ou falso. São três afirmações sobre o animal da fase, sorteadas entre cinco."
   },
   {
    "id": "q02",
-   "ini": 11823,
-   "dur": 163,
+   "ini": 9775,
+   "dur": 138,
    "texto": "Esta eu acertei. O jogo confirma e explica o porquê."
   },
   {
    "id": "q03",
-   "ini": 12109,
-   "dur": 374,
+   "ini": 10061,
+   "dur": 340,
    "texto": "Nesta eu vou errar de propósito. Repare que o jogo não só marca o erro: mostra a resposta certa e uma explicação. A ideia é aprender com o erro."
   },
   {
    "id": "q04",
-   "ini": 12713,
-   "dur": 212,
+   "ini": 10665,
+   "dur": 182,
    "texto": "No fim aparece quantas eu acertei, e os pontos. Cada acerto vale vinte."
   },
   {
    "id": "q05",
-   "ini": 12954,
-   "dur": 174,
+   "ini": 10906,
+   "dur": 134,
    "texto": "Com Enter, o jogo passa para a próxima fase, com um animal novo."
   },
   {
+   "id": "q03b",
+   "ini": 10517,
+   "dur": 50,
+   "texto": "E a terceira eu acerto."
+  },
+  {
    "id": "o01",
-   "ini": 13181,
-   "dur": 295,
+   "ini": 11133,
+   "dur": 241,
    "texto": "São cinco fases: arara, onça, boto, tucano e capivara. Cada uma tem uma dica e uma palavra diferente."
   },
   {
    "id": "o02",
-   "ini": 13494,
-   "dur": 198,
+   "ini": 11446,
+   "dur": 151,
    "texto": "A última palavra, capivara, tem oito letras, então é a fase mais longa."
   },
   {
+   "id": "c01",
+   "ini": 11679,
+   "dur": 208,
+   "texto": "Agora, o fim da fase da capivara. Desta vez eu monto a palavra certa logo de primeira."
+  },
+  {
+   "id": "c02",
+   "ini": 11899,
+   "dur": 220,
+   "texto": "Acertando de primeira, eu ganho os cinquenta pontos inteiros. E cada animal tem a sua curiosidade."
+  },
+  {
+   "id": "c03",
+   "ini": 12125,
+   "dur": 245,
+   "texto": "No verdadeiro ou falso, agora eu acerto as três. Cada resposta certa vem com uma explicação curta."
+  },
+  {
+   "id": "c04",
+   "ini": 12496,
+   "dur": 149,
+   "texto": "Três de três! São mais sessenta pontos, e a fase termina."
+  },
+  {
    "id": "o03",
-   "ini": 13716,
-   "dur": 480,
+   "ini": 12687,
+   "dur": 423,
    "texto": "Fora do tutorial, encostar num bicho tira uma vida. O Léo é empurrado, faz cara de dor e fica piscando por um instante. Se perder as três vidas, a fase recomeça do zero, sem game over."
   },
   {
    "id": "o04",
-   "ini": 14210,
-   "dur": 320,
+   "ini": 13181,
+   "dur": 266,
    "texto": "Quando a criança completa as cinco fases, aparece o final da história: o livro está completo, e a vovó agradece, mostrando a pontuação."
   },
   {
    "id": "j01",
-   "ini": 14565,
-   "dur": 140,
+   "ini": 13536,
+   "dur": 115,
    "texto": "Agora eu quero mostrar o que mudou até chegar nesta versão."
   },
   {
    "id": "j02",
-   "ini": 14717,
-   "dur": 491,
+   "ini": 13663,
+   "dur": 438,
    "texto": "Um esclarecimento: na minha turma não houve o Dia do Analista, então eu não recebi a ficha técnica de outra equipe. Os ajustes vieram das recomendações da aula: quem vai querer jogar, e dos meus próprios testes."
   },
   {
    "id": "j03",
-   "ini": 15247,
-   "dur": 371,
+   "ini": 14140,
+   "dur": 330,
    "texto": "Esta é a versão um ponto três, de outubro. O menu tinha só o título em texto e botões simples, e o Léo era um bonequinho de doze por dezesseis pixels."
   },
   {
    "id": "j04",
-   "ini": 15630,
-   "dur": 393,
+   "ini": 14482,
+   "dur": 347,
    "texto": "E o mais importante: o jogador caía direto na fase, sem história e sem tutorial. Quem nunca tinha jogado não sabia o que fazer, nem por que estava coletando letras."
   },
   {
    "id": "j05",
-   "ini": 16050,
-   "dur": 560,
+   "ini": 14856,
+   "dur": 509,
    "texto": "A aula mostrou que o jogo precisa de uma história que dê sentido às ações, e de um tutorial que ensine uma coisa de cada vez. Por isso eu criei a história do Livro da Floresta, com personagem, conflito e consequência, e o tutorial com tentativa segura."
   },
   {
    "id": "j06",
-   "ini": 16634,
-   "dur": 336,
+   "ini": 15389,
+   "dur": 306,
    "texto": "Outra recomendação foi a leitura. As mensagens agora ficam mais tempo na tela, e o começo da fase mostra a dica do animal em destaque."
   },
   {
    "id": "j07",
-   "ini": 16997,
-   "dur": 429,
+   "ini": 15722,
+   "dur": 368,
    "texto": "Eu também redesenhei o Léo. Agora ele tem dezesseis por vinte e quatro pixels, rosto expressivo e treze quadros de animação, com corrida, pulo, queda, dano e comemoração."
   },
   {
    "id": "j08",
-   "ini": 17438,
-   "dur": 208,
+   "ini": 16102,
+   "dur": 176,
    "texto": "Os animais das telas de desafio também foram redesenhados, com cenário e mais detalhes."
   },
   {
    "id": "j09",
-   "ini": 17681,
-   "dur": 373,
+   "ini": 16313,
+   "dur": 332,
    "texto": "O menu ganhou um logo em pixel art, placas de madeira e uma cena viva. E entraram efeitos visuais leves, como a vinheta e as transições entre as telas."
   },
   {
    "id": "j10",
-   "ini": 18086,
-   "dur": 278,
+   "ini": 16677,
+   "dur": 237,
    "texto": "Por fim, o jogo agora tem uma versão para navegador. Dá para jogar direto pelo link, sem instalar nada."
   },
   {
+   "id": "l01",
+   "ini": 16953,
+   "dur": 251,
+   "texto": "O que ainda falta: testar o jogo com crianças do público-alvo e colocar narração em áudio, para ajudar quem ainda não lê sozinho."
+  },
+  {
+   "id": "l02",
+   "ini": 17216,
+   "dur": 187,
+   "texto": "Também quero criar um mapa diferente para cada animal, com a dificuldade aumentando aos poucos."
+  },
+  {
    "id": "e01",
-   "ini": 18408,
-   "dur": 370,
+   "ini": 17443,
+   "dur": 339,
    "texto": "O código, o documento de design e as instruções estão no GitHub. E cada mudança passa por revisão e por uma validação automática antes de ser publicada."
   },
   {
    "id": "e02",
-   "ini": 18790,
-   "dur": 278,
+   "ini": 17794,
+   "dur": 236,
    "texto": "Para jogar, é só acessar o endereço que está na tela, ou baixar a versão para Windows na página de releases do repositório."
   },
   {
    "id": "e03",
-   "ini": 19080,
-   "dur": 209,
+   "ini": 18042,
+   "dur": 184,
    "texto": "Obrigado por assistir! E vem comigo ajudar o Léo a salvar o Livro da Floresta!"
   }
  ],
@@ -446,62 +523,67 @@
   {
    "texto": "A proposta",
    "sub": "jogo de plataforma educativo",
-   "ini": 1048
+   "ini": 363
   },
   {
    "texto": "A tela inicial",
    "sub": "menu",
-   "ini": 2143
+   "ini": 895
   },
   {
    "texto": "A história",
    "sub": "o objetivo do jogo",
-   "ini": 3850
+   "ini": 1802
   },
   {
    "texto": "Primeira vez jogando",
    "sub": "o tutorial ensina uma ação de cada vez",
-   "ini": 5244
+   "ini": 3196
   },
   {
    "texto": "O resto da fase",
    "sub": "agora sem dicas",
-   "ini": 9903
+   "ini": 7855
   },
   {
    "texto": "Desafio 1",
    "sub": "montar a palavra",
-   "ini": 10245
+   "ini": 8197
   },
   {
    "texto": "Desafio 2",
    "sub": "verdadeiro ou falso",
-   "ini": 11498
+   "ini": 9450
   },
   {
    "texto": "As outras fases",
    "sub": "onça, boto, tucano e capivara",
-   "ini": 13175
+   "ini": 11127
   },
   {
    "texto": "Vidas",
    "sub": "fora do tutorial, errar custa",
-   "ini": 13710
+   "ini": 12681
   },
   {
    "texto": "O final",
    "sub": "o livro está completo",
-   "ini": 14204
+   "ini": 13175
   },
   {
    "texto": "Os ajustes",
    "sub": "do protótipo até a versão final",
-   "ini": 14547
+   "ini": 13518
+  },
+  {
+   "texto": "O que ainda falta",
+   "sub": "próximos passos",
+   "ini": 16944
   },
   {
    "texto": "Links",
    "sub": "repositório, jogo no navegador e Windows",
-   "ini": 18394
+   "ini": 17429
   }
  ]
 }

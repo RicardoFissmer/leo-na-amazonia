@@ -1,59 +1,62 @@
 Léo na Amazônia - roteiro da apresentação com tempos (mm:ss)
 
-[00:00.8] (6 s)  Olá! Esta é a apresentação final do jogo Léo na Amazônia.
-[00:06.8] (12 s)  Eu sou o Ricardo Fissmer Batista, do curso de Engenharia de Software. Este é um projeto individual: eu fiz o jogo sozinho, então o grupo sou só eu.
-[00:19.4] (14 s)  Neste vídeo eu vou mostrar a proposta do jogo, a história, como quem joga pela primeira vez aprende os controles, um desafio completo, e os ajustes que eu fiz até chegar nesta versão final.
-[00:35.4] (9 s)  Léo na Amazônia é um jogo de plataforma 2D educativo, em pixel art, feito na Godot Engine 4.
-[00:44.5] (7 s)  Ele foi pensado para crianças em fase de alfabetização, mais ou menos de seis a dez anos.
-[00:52.0] (19 s)  A ideia é simples: o jogador corre pela floresta, coleta letras e monta o nome de animais da Amazônia. Assim, ele treina leitura e escrita enquanto aprende curiosidades sobre a arara, a onça-pintada, o boto, o tucano e a capivara.
-[01:11.6] (11 s)  Esta é a tela inicial. Tem o logo, o Léo correndo atrás das letras, a onça logo atrás dele, e vaga-lumes e folhas caindo na mata.
-[01:23.3] (8 s)  Dá para navegar com o mouse ou com as setas. A cabecinha do Léo mostra qual botão está selecionado.
-[01:32.0] (12 s)  Aqui tem o modo retrô, que deixa a tela com cara de televisão antiga. É opcional, e eu deixo desligado, porque o texto fica mais nítido.
-[01:44.3] (11 s)  Em Como jogar fica um resumo dos controles: setas ou A e D para andar, espaço para pular, Esc para voltar ao menu e M para ligar ou desligar o som.
-[01:56.3] (11 s)  Mas quem joga pela primeira vez não precisa ler isso antes. O próprio jogo ensina durante a primeira fase. Vou clicar em Jogar.
-[02:08.5] (14 s)  Antes da fase, aparece a história. O Léo é um menino que mora na Amazônia e adora o Livro da Floresta da avó dele, a vovó Lúcia. Cada página mostra um animal e o nome dele.
-[02:24.1] (8 s)  Só que uma ventania arranca as letras do livro e espalha tudo pela mata. E os animais ficam sem nome.
-[02:33.6] (12 s)  Então a missão do Léo, e de quem joga, é entrar na floresta, recuperar as letras e devolver o nome de cada animal. Esse é o objetivo do jogo.
-[02:46.1] (8 s)  O texto aparece aos poucos, no ritmo de leitura de uma criança, e dá para pular a história com Esc.
-[02:55.0] (12 s)  Agora começa a fase um. Repare no quadro de dica lá em cima: o tutorial mostra uma ação de cada vez. A primeira é andar com as setas.
-[03:08.3] (13 s)  Assim que eu ando, a dica muda: pegar a moeda com letra. As letras formam o nome do animal da dica, que fica no alto da tela: ave colorida de bico forte.
-[03:22.4] (6 s)  Peguei a letra A. Ela aparece lá em cima, e eu ganho dez pontos.
-[03:29.4] (12 s)  A próxima dica ensina o pulo. Segurando o espaço, o Léo pula mais alto. Vou usar isso para subir no tronco e pegar a letra que está lá em cima.
-[03:42.2] (12 s)  Pronto, mais uma letra. Repare que o Léo estica no pulo e solta uma poeirinha quando cai. São detalhes para o movimento ficar gostoso.
-[03:54.3] (6 s)  Agora um buraco. A dica avisa antes, e é só pular por cima.
-[04:05.4] (11 s)  Aqui aparece a onça. Ela anda de um lado para o outro no chão. Encostar nela tira uma vida, então eu pulo por cima dela.
-[04:16.5] (12 s)  Também tem letras erradas pelo caminho, que não fazem parte da palavra. Pegar uma delas tira cinco pontos, então vale ler a dica e escolher bem.
-[04:28.8] (11 s)  No rio mora a piranha. Quando aparecem bolhas, ela vai pular. Vou errar de propósito e cair no rio, para mostrar uma coisa.
-[04:40.4] (14 s)  Na parte do tutorial, errar não tira vida. O jogo diz: tudo bem, tente de novo, e o Léo volta para logo antes do obstáculo. A criança aprende sem ser punida.
-[04:55.0] (8 s)  Agora eu espero a piranha mergulhar e atravesso. E ainda pego a letra que fica em cima do rio.
-[05:03.0] (9 s)  A cobra fica escondida embaixo do tronco. Ela treme antes de descer, então dá para perceber o perigo a tempo.
-[05:13.0] (6 s)  Para pegar a letra mais alta, eu subo nos troncos, um de cada vez.
-[05:19.2] (11 s)  Com a mensagem: agora é com você, o tutorial termina. Daqui para frente valem as regras normais, com três vidas por fase.
-[05:30.3] (6 s)  A fase continua com mais um buraco e outra onça, agora sem as dicas.
-[05:36.7] (5 s)  E com a última letra, a parte de plataforma termina.
-[05:41.7] (11 s)  Agora vem a segunda parte do desafio: montar a palavra. As letras que eu peguei aparecem embaralhadas, junto com a imagem do animal.
-[05:52.9] (11 s)  Vou montar errado de propósito. As letras que estão na posição certa ficam verdes e travadas, e as erradas ficam vermelhas e voltam.
-[06:05.1] (8 s)  Agora sim: arara! Aparece uma curiosidade sobre o animal, e o nome volta para o livro.
-[06:13.9] (9 s)  Montar certo na primeira tentativa vale cinquenta pontos. Cada tentativa a mais vale um pouco menos.
-[06:23.5] (10 s)  A terceira parte é o desafio de verdadeiro ou falso. São três afirmações sobre o animal da fase, sorteadas entre cinco.
-[06:34.1] (5 s)  Esta eu acertei. O jogo confirma e explica o porquê.
-[06:43.6] (12 s)  Nesta eu vou errar de propósito. Repare que o jogo não só marca o erro: mostra a resposta certa e uma explicação. A ideia é aprender com o erro.
-[07:03.8] (7 s)  No fim aparece quantas eu acertei, e os pontos. Cada acerto vale vinte.
-[07:11.8] (6 s)  Com Enter, o jogo passa para a próxima fase, com um animal novo.
-[07:19.4] (10 s)  São cinco fases: arara, onça, boto, tucano e capivara. Cada uma tem uma dica e uma palavra diferente.
-[07:29.8] (7 s)  A última palavra, capivara, tem oito letras, então é a fase mais longa.
-[07:37.2] (16 s)  Fora do tutorial, encostar num bicho tira uma vida. O Léo é empurrado, faz cara de dor e fica piscando por um instante. Se perder as três vidas, a fase recomeça do zero, sem game over.
-[07:53.7] (11 s)  Quando a criança completa as cinco fases, aparece o final da história: o livro está completo, e a vovó agradece, mostrando a pontuação.
-[08:05.5] (5 s)  Agora eu quero mostrar o que mudou até chegar nesta versão.
-[08:10.6] (16 s)  Um esclarecimento: na minha turma não houve o Dia do Analista, então eu não recebi a ficha técnica de outra equipe. Os ajustes vieram das recomendações da aula: quem vai querer jogar, e dos meus próprios testes.
-[08:28.2] (12 s)  Esta é a versão um ponto três, de outubro. O menu tinha só o título em texto e botões simples, e o Léo era um bonequinho de doze por dezesseis pixels.
-[08:41.0] (13 s)  E o mais importante: o jogador caía direto na fase, sem história e sem tutorial. Quem nunca tinha jogado não sabia o que fazer, nem por que estava coletando letras.
-[08:55.0] (19 s)  A aula mostrou que o jogo precisa de uma história que dê sentido às ações, e de um tutorial que ensine uma coisa de cada vez. Por isso eu criei a história do Livro da Floresta, com personagem, conflito e consequência, e o tutorial com tentativa segura.
-[09:14.5] (11 s)  Outra recomendação foi a leitura. As mensagens agora ficam mais tempo na tela, e o começo da fase mostra a dica do animal em destaque.
-[09:26.6] (14 s)  Eu também redesenhei o Léo. Agora ele tem dezesseis por vinte e quatro pixels, rosto expressivo e treze quadros de animação, com corrida, pulo, queda, dano e comemoração.
-[09:41.3] (7 s)  Os animais das telas de desafio também foram redesenhados, com cenário e mais detalhes.
-[09:49.4] (12 s)  O menu ganhou um logo em pixel art, placas de madeira e uma cena viva. E entraram efeitos visuais leves, como a vinheta e as transições entre as telas.
-[10:02.9] (9 s)  Por fim, o jogo agora tem uma versão para navegador. Dá para jogar direto pelo link, sem instalar nada.
-[10:13.6] (12 s)  O código, o documento de design e as instruções estão no GitHub. E cada mudança passa por revisão e por uma validação automática antes de ser publicada.
-[10:26.3] (9 s)  Para jogar, é só acessar o endereço que está na tela, ou baixar a versão para Windows na página de releases do repositório.
-[10:36.0] (7 s)  Obrigado por assistir! E vem comigo ajudar o Léo a salvar o Livro da Floresta!
+[00:00.6] (10 s)  Olá! Eu sou o Ricardo Fissmer Batista, de Engenharia de Software, e este é o Léo na Amazônia, o jogo que eu fiz sozinho, como projeto individual.
+[00:12.4] (8 s)  É um jogo de plataforma educativo, feito na Godot, para crianças de seis a dez anos que estão aprendendo a ler e a escrever.
+[00:20.8] (8 s)  O jogador corre pela floresta, coleta letras e monta o nome de animais da Amazônia: arara, onça, boto, tucano e capivara.
+[00:30.0] (6 s)  Esta é a tela inicial, com o Léo correndo atrás das letras e a onça logo atrás dele.
+[00:36.7] (7 s)  Dá para escolher com o mouse ou com as setas. A cabecinha do Léo mostra o botão selecionado.
+[00:45.1] (3 s)  Em Como jogar tem um resumo dos controles.
+[00:51.4] (7 s)  Mas ninguém precisa ler isso antes: o próprio jogo ensina tudo na primeira fase. Vamos jogar!
+[01:00.3] (13 s)  Antes da fase, aparece a história. O Léo é um menino que mora na Amazônia e adora o Livro da Floresta da avó dele, a vovó Lúcia. Cada página mostra um animal e o nome dele.
+[01:15.8] (8 s)  Só que uma ventania arranca as letras do livro e espalha tudo pela mata. E os animais ficam sem nome.
+[01:25.3] (10 s)  Então a missão do Léo, e de quem joga, é entrar na floresta, recuperar as letras e devolver o nome de cada animal. Esse é o objetivo do jogo.
+[01:37.9] (7 s)  O texto aparece aos poucos, no ritmo de leitura de uma criança, e dá para pular a história com Esc.
+[01:46.7] (11 s)  Agora começa a fase um. Repare no quadro de dica lá em cima: o tutorial mostra uma ação de cada vez. A primeira é andar com as setas.
+[02:00.1] (11 s)  Assim que eu ando, a dica muda: pegar a moeda com letra. As letras formam o nome do animal da dica, que fica no alto da tela: ave colorida de bico forte.
+[02:14.1] (5 s)  Peguei a letra A. Ela aparece lá em cima, e eu ganho dez pontos.
+[02:21.1] (11 s)  A próxima dica ensina o pulo. Segurando o espaço, o Léo pula mais alto. Vou usar isso para subir no tronco e pegar a letra que está lá em cima.
+[02:33.9] (10 s)  Pronto, mais uma letra. Repare que o Léo estica no pulo e solta uma poeirinha quando cai. São detalhes para o movimento ficar gostoso.
+[02:46.1] (5 s)  Agora um buraco. A dica avisa antes, e é só pular por cima.
+[02:57.2] (10 s)  Aqui aparece a onça. Ela anda de um lado para o outro no chão. Encostar nela tira uma vida, então eu pulo por cima dela.
+[03:08.2] (11 s)  Também tem letras erradas pelo caminho, que não fazem parte da palavra. Pegar uma delas tira cinco pontos, então vale ler a dica e escolher bem.
+[03:20.5] (10 s)  No rio mora a piranha. Quando aparecem bolhas, ela vai pular. Vou errar de propósito e cair no rio, para mostrar uma coisa.
+[03:32.1] (12 s)  Na parte do tutorial, errar não tira vida. O jogo diz: tudo bem, tente de novo, e o Léo volta para logo antes do obstáculo. A criança aprende sem ser punida.
+[03:46.7] (7 s)  Agora eu espero a piranha mergulhar e atravesso. E ainda pego a letra que fica em cima do rio.
+[03:54.8] (8 s)  A cobra fica escondida embaixo do tronco. Ela treme antes de descer, então dá para perceber o perigo a tempo.
+[04:04.8] (4 s)  Para pegar a letra mais alta, eu subo nos troncos, um de cada vez.
+[04:11.0] (9 s)  Com a mensagem: agora é com você, o tutorial termina. Daqui para frente valem as regras normais, com três vidas por fase.
+[04:22.0] (5 s)  A fase continua com mais um buraco e outra onça, agora sem as dicas.
+[04:28.4] (4 s)  E com a última letra, a parte de plataforma termina.
+[04:33.4] (9 s)  Agora vem a segunda parte do desafio: montar a palavra. As letras que eu peguei aparecem embaralhadas, junto com a imagem do animal.
+[04:44.6] (10 s)  Vou montar errado de propósito. As letras que estão na posição certa ficam verdes e travadas, e as erradas ficam vermelhas e voltam.
+[04:56.9] (7 s)  Agora sim: arara! Aparece uma curiosidade sobre o animal, e o nome volta para o livro.
+[05:05.7] (8 s)  Montar certo na primeira tentativa vale cinquenta pontos. Cada tentativa a mais vale um pouco menos.
+[05:15.2] (9 s)  A terceira parte é o desafio de verdadeiro ou falso. São três afirmações sobre o animal da fase, sorteadas entre cinco.
+[05:25.8] (5 s)  Esta eu acertei. O jogo confirma e explica o porquê.
+[05:35.4] (11 s)  Nesta eu vou errar de propósito. Repare que o jogo não só marca o erro: mostra a resposta certa e uma explicação. A ideia é aprender com o erro.
+[05:50.6] (2 s)  E a terceira eu acerto.
+[05:55.5] (6 s)  No fim aparece quantas eu acertei, e os pontos. Cada acerto vale vinte.
+[06:03.5] (4 s)  Com Enter, o jogo passa para a próxima fase, com um animal novo.
+[06:11.1] (8 s)  São cinco fases: arara, onça, boto, tucano e capivara. Cada uma tem uma dica e uma palavra diferente.
+[06:21.5] (5 s)  A última palavra, capivara, tem oito letras, então é a fase mais longa.
+[06:29.3] (7 s)  Agora, o fim da fase da capivara. Desta vez eu monto a palavra certa logo de primeira.
+[06:36.6] (7 s)  Acertando de primeira, eu ganho os cinquenta pontos inteiros. E cada animal tem a sua curiosidade.
+[06:44.2] (8 s)  No verdadeiro ou falso, agora eu acerto as três. Cada resposta certa vem com uma explicação curta.
+[06:56.5] (5 s)  Três de três! São mais sessenta pontos, e a fase termina.
+[07:02.9] (14 s)  Fora do tutorial, encostar num bicho tira uma vida. O Léo é empurrado, faz cara de dor e fica piscando por um instante. Se perder as três vidas, a fase recomeça do zero, sem game over.
+[07:19.4] (9 s)  Quando a criança completa as cinco fases, aparece o final da história: o livro está completo, e a vovó agradece, mostrando a pontuação.
+[07:31.2] (4 s)  Agora eu quero mostrar o que mudou até chegar nesta versão.
+[07:35.4] (15 s)  Um esclarecimento: na minha turma não houve o Dia do Analista, então eu não recebi a ficha técnica de outra equipe. Os ajustes vieram das recomendações da aula: quem vai querer jogar, e dos meus próprios testes.
+[07:51.3] (11 s)  Esta é a versão um ponto três, de outubro. O menu tinha só o título em texto e botões simples, e o Léo era um bonequinho de doze por dezesseis pixels.
+[08:02.7] (12 s)  E o mais importante: o jogador caía direto na fase, sem história e sem tutorial. Quem nunca tinha jogado não sabia o que fazer, nem por que estava coletando letras.
+[08:15.2] (17 s)  A aula mostrou que o jogo precisa de uma história que dê sentido às ações, e de um tutorial que ensine uma coisa de cada vez. Por isso eu criei a história do Livro da Floresta, com personagem, conflito e consequência, e o tutorial com tentativa segura.
+[08:33.0] (10 s)  Outra recomendação foi a leitura. As mensagens agora ficam mais tempo na tela, e o começo da fase mostra a dica do animal em destaque.
+[08:44.1] (12 s)  Eu também redesenhei o Léo. Agora ele tem dezesseis por vinte e quatro pixels, rosto expressivo e treze quadros de animação, com corrida, pulo, queda, dano e comemoração.
+[08:56.7] (6 s)  Os animais das telas de desafio também foram redesenhados, com cenário e mais detalhes.
+[09:03.8] (11 s)  O menu ganhou um logo em pixel art, placas de madeira e uma cena viva. E entraram efeitos visuais leves, como a vinheta e as transições entre as telas.
+[09:15.9] (8 s)  Por fim, o jogo agora tem uma versão para navegador. Dá para jogar direto pelo link, sem instalar nada.
+[09:25.1] (8 s)  O que ainda falta: testar o jogo com crianças do público-alvo e colocar narração em áudio, para ajudar quem ainda não lê sozinho.
+[09:33.9] (6 s)  Também quero criar um mapa diferente para cada animal, com a dificuldade aumentando aos poucos.
+[09:41.4] (11 s)  O código, o documento de design e as instruções estão no GitHub. E cada mudança passa por revisão e por uma validação automática antes de ser publicada.
+[09:53.1] (8 s)  Para jogar, é só acessar o endereço que está na tela, ou baixar a versão para Windows na página de releases do repositório.
+[10:01.4] (6 s)  Obrigado por assistir! E vem comigo ajudar o Léo a salvar o Livro da Floresta!
